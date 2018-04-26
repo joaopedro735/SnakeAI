@@ -139,6 +139,8 @@ public class MainFrame extends JFrame implements GAListener {
         globalPanel.add(simulationPanel, java.awt.BorderLayout.EAST);
         this.getContentPane().add(globalPanel);
 
+        panelParameters.setMainFrame(this);
+
         pack();
     }
 
@@ -308,6 +310,12 @@ public class MainFrame extends JFrame implements GAListener {
         buttonExperiments.setEnabled(experiments);
         buttonRunExperiments.setEnabled(runExperiments);
         simulationPanel.setJButtonSimulateEnabled(runEnvironment);
+    }
+
+    public SnakeProblem newProblem(int index){
+        if (index == 0 || index == 1){
+            problem = new SnakeProblem(index);
+        }
     }
 }
 
