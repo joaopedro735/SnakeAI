@@ -37,6 +37,8 @@ public class PanelParameters extends PanelAtributesValue {
     JTextField textFieldProbRecombination = new JTextField(PROB_RECOMBINATION, TEXT_FIELD_LENGHT);
     JTextField textFieldProbMutation = new JTextField(PROB_MUTATION, TEXT_FIELD_LENGHT);
     //TODO - MORE PARAMETERS?
+    String[] snakeAgents = {"Ad-Hoc Snake", "Random Snake", "AI Snake"};
+    JComboBox comboBoxSnakeAgents = new JComboBox(snakeAgents);
 
     public PanelParameters() {
         title = "Genetic algorithm parameters";
@@ -71,6 +73,10 @@ public class PanelParameters extends PanelAtributesValue {
         valueComponents.add(textFieldProbMutation);
 
         //TODO - MORE PARAMETERS?
+        labels.add(new JLabel("Type of agent: "));
+        valueComponents.add(comboBoxSnakeAgents);
+        comboBoxSnakeAgents.addActionListener(new JComboBoxSnakeMethods_ActionAdapter(this));
+
         configure();
     }
 
@@ -119,6 +125,20 @@ class JComboBoxSelectionMethods_ActionAdapter implements ActionListener {
     final private PanelParameters adaptee;
 
     JComboBoxSelectionMethods_ActionAdapter(PanelParameters adaptee) {
+        this.adaptee = adaptee;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        adaptee.actionPerformedSelectionMethods(e);
+    }
+}
+
+class JComboBoxSnakeMethods_ActionAdapter implements ActionListener {
+
+    final private PanelParameters adaptee;
+
+    JComboBoxSnakeMethods_ActionAdapter(PanelParameters adaptee) {
         this.adaptee = adaptee;
     }
 
