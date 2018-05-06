@@ -3,23 +3,25 @@ package snake;
 import java.awt.Color;
 
 public class Cell {
-    public static final Color COLOR = Color.WHITE;
-
     private final int line, column;
-    private SnakeAgent agent;
-    private Food food;
+    private SnakeAgent agent = null;
+    private Food food = null;
+    private Tail tail = null;
 
     public Cell(int line, int column) {
         this.line = line;
         this.column = column;
     }
 
-    public int getLine() {
-        return line;
-    }
-
-    public int getColumn() {
-        return column;
+    public Color getColor() {
+        if (agent != null) {
+            return agent.getColor();
+        }else if (food != null) {
+            return food.getColor();
+        }else if (tail != null) {
+            return tail.getColor();
+        }
+        return Color.WHITE;
     }
 
     public SnakeAgent getAgent() {
@@ -34,19 +36,35 @@ public class Cell {
         return agent != null;
     }
 
-    public Food getFood() { return food; }
+    public Food getFood(){
+        return food;
+    }
 
-    public void setFood(Food food) { this.food = food; }
+    public void setFood(Food food) {
+        this.food = food;
+    }
 
-    public boolean hastFood() { return food != null; }
+    public boolean hasFood(){
+        return food != null;
+    }
 
-    public Color getColor() {
-        if (hasAgent()) {
-            return agent.getColor();
-        } else if (hastFood()) {
-            return food.getColor();
-        } else {
-            return Cell.COLOR;
-        }
+    public int getLine() {
+        return line;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public Tail getTail() {
+        return tail;
+    }
+
+    public void setTail(Tail tail) {
+        this.tail = tail;
+    }
+
+    public boolean hasTail() {
+        return tail != null;
     }
 }

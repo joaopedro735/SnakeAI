@@ -49,8 +49,9 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
     }
 
     public void jButtonSimulate_actionPerformed(ActionEvent e) {
-
+        System.out.println("Get problem");
         environment = mainFrame.getProblem().getEnvironment();
+        System.out.println(environment.getTipoProblema());
         environment.addEnvironmentListener(this);
 
         buildImage(environment);
@@ -61,10 +62,13 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
             @Override
             public Void doInBackground() {
                 int environmentSimulations = mainFrame.getProblem().getNumEvironmentSimulations();
-
+                System.out.println(environmentSimulations);
                 for (int i = 0; i < environmentSimulations; i++) {
+                    System.out.println("Initialize");
                     environment.initialize(i);
+                    System.out.println("Environment Update");
                     environmentUpdated();
+                    System.out.println("Simulate");
                     environment.simulate();
                 }
                 return null;

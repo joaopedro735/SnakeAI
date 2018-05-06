@@ -2,7 +2,8 @@ package snake.snakeAI.ga;
 
 public abstract class RealVectorIndividual <P extends Problem, I extends RealVectorIndividual> extends Individual<P, I>{
     // TODO
-    
+    // a dos ga das aulas
+    //
     public RealVectorIndividual(P problem, int size) {
         super(problem);
         // TODO

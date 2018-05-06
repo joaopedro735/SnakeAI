@@ -14,12 +14,12 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
     private static final int GENOME_SIZE = 100; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
 
     final private int environmentSize;
-    final private int maxIterations;
-    final private int numInputs;
-    final private int numHiddenUnits;
-    final public int numOutputs;
-    final private int numEnvironmentRuns;
-
+    private int maxIterations;
+    private int numInputs;
+    private int numHiddenUnits;
+    public int numOutputs;
+    private int numEnvironmentRuns;
+    private int tipoProblema;
     final private Environment environment;
 
     public SnakeProblem(
@@ -36,7 +36,19 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
 
         environment = new Environment(
                 environmentSize,
-                maxIterations);
+                maxIterations,-1);
+    }
+
+    public SnakeProblem(int tipoProblema) {
+        this.maxIterations = 500;
+        this.numEnvironmentRuns = 10;
+        this.environmentSize = 10;
+        System.out.println("Construtor adhoc/random");
+        environment = new Environment(
+
+                environmentSize,
+                maxIterations,
+                tipoProblema);
     }
 
     @Override

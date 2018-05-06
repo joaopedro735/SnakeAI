@@ -1,6 +1,5 @@
 package gui;
 
-import snake.SnakeAgent;
 import snake.snakeAI.ga.geneticOperators.*;
 import snake.snakeAI.ga.selectionMethods.RouletteWheel;
 import snake.snakeAI.ga.selectionMethods.SelectionMethod;
@@ -14,9 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import snake.snakeAI.SnakeIndividual;
 import snake.snakeAI.SnakeProblem;
-import snake.snakeAI.nn.SnakeAIAgent;
-import snake.snakeAdhoc.SnakeAdhocAgent;
-import snake.snakeRandom.SnakeRandomAgent;
 
 public class PanelParameters extends PanelAtributesValue {
 
@@ -29,17 +25,6 @@ public class PanelParameters extends PanelAtributesValue {
     public static final String TOURNAMENT_SIZE = "4";
     public static final String PROB_RECOMBINATION = "0.7";
     public static final String PROB_MUTATION = "0.7";
-    public static SnakeAgent agent;
-
-    public MainFrame getMainFrame() {
-        return mainFrame;
-    }
-
-    public void setMainFrame(MainFrame mainFrame) {
-        this.mainFrame = mainFrame;
-    }
-
-    public MainFrame mainFrame;
 
     JTextField textFieldSeed = new JTextField(SEED, TEXT_FIELD_LENGHT);
     JTextField textFieldN = new JTextField(POPULATION_SIZE, TEXT_FIELD_LENGHT);
@@ -99,10 +84,6 @@ public class PanelParameters extends PanelAtributesValue {
         textFieldTournamentSize.setEnabled(comboBoxSelectionMethods.getSelectedIndex() == 0);
     }
 
-    public void actionPerformedSnakeMethods(ActionEvent e) {
-        mainFrame.newProblem(comboBoxSnakeAgents.getSelectedIndex());
-    }
-
     public SelectionMethod<SnakeIndividual, SnakeProblem> getSelectionMethod() {
         switch (comboBoxSelectionMethods.getSelectedIndex()) {
             case 0:
@@ -137,21 +118,6 @@ public class PanelParameters extends PanelAtributesValue {
         //TODO
         return new MutationMUTATION_NAME<>(mutationProbability/*TODO?*/);
     }
-
-    public SnakeAgent getTypeAgent() {
-        switch (comboBoxSnakeAgents.getSelectedIndex()) {
-            case 0:
-                agent = new SnakeAdhocAgent(null,null);
-                return new SnakeAdhocAgent(null,null);
-            case 1:
-                agent = new SnakeRandomAgent(null,null);
-                return new SnakeRandomAgent(null,null);
-            case 2:
-                agent = new SnakeAIAgent(null,0,0,0);
-                return new SnakeAIAgent(null,0,0,0);
-        }
-        return null;
-    }
 }
 
 class JComboBoxSelectionMethods_ActionAdapter implements ActionListener {
@@ -178,7 +144,7 @@ class JComboBoxSnakeMethods_ActionAdapter implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        adaptee.actionPerformedSnakeMethods(e);
+        adaptee.actionPerformedSelectionMethods(e);
     }
 }
 

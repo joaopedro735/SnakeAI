@@ -36,7 +36,7 @@ public class SnakeAIAgent extends SnakeAgent {
             int inputLayerSize,
             int hiddenLayerSize,
             int outputLayerSize) {
-        super(cell, Color.BLUE);
+        super(cell, Color.BLUE,null);
         this.inputLayerSize = inputLayerSize;
         this.hiddenLayerSize = hiddenLayerSize;
         this.outputLayerSize = outputLayerSize;

@@ -14,6 +14,7 @@ public class MutationMUTATION_NAME <I extends RealVectorIndividual> extends Muta
     @Override
     public void run(I ind) {
         // TODO
+        //random.nextDouble
     }
     
     @Override

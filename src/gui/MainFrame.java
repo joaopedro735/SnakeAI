@@ -41,15 +41,22 @@ public class MainFrame extends JFrame implements GAListener {
     private XYSeries seriesBestIndividual;
     private XYSeries seriesAverage;
     private SwingWorker<Void, Void> worker;
-
+    private int tipoProblema;
     private PanelSimulation simulationPanel;
 
     public MainFrame() {
         try {
+            this.tipoProblema = panelParameters.comboBoxSnakeAgents.getSelectedIndex();
+            criarProblema();
             jbInit();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
+    }
+
+    private void criarProblema() {
+
+        problem = new SnakeProblem(this.tipoProblema);
     }
 
     private void jbInit() throws Exception {
@@ -138,8 +145,6 @@ public class MainFrame extends JFrame implements GAListener {
         globalPanel.add(bigLeftPanel, java.awt.BorderLayout.WEST);
         globalPanel.add(simulationPanel, java.awt.BorderLayout.EAST);
         this.getContentPane().add(globalPanel);
-
-        panelParameters.setMainFrame(this);
 
         pack();
     }
@@ -310,12 +315,6 @@ public class MainFrame extends JFrame implements GAListener {
         buttonExperiments.setEnabled(experiments);
         buttonRunExperiments.setEnabled(runExperiments);
         simulationPanel.setJButtonSimulateEnabled(runEnvironment);
-    }
-
-    public SnakeProblem newProblem(int index){
-        if (index == 0 || index == 1){
-            problem = new SnakeProblem(index);
-        }
     }
 }
 

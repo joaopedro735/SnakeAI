@@ -1,5 +1,6 @@
 package snake;
 
+import snake.snakeAdhoc.SnakeAdhocAgent;
 import snake.snakeRandom.SnakeRandomAgent;
 
 import java.awt.Color;
@@ -14,12 +15,12 @@ public class Environment {
     private final List<SnakeAgent> agents;
     private Food food;
     private final int maxIterations;
+    private int tipoProblema;
 
     public Environment(
             int size,
-            int maxIterations) {
-
-        this.maxIterations = maxIterations;
+            int maxIterations,
+            int tipoProblema) {
 
         this.grid = new Cell[size][size];
         for (int i = 0; i < grid.length; i++) {
@@ -28,29 +29,63 @@ public class Environment {
             }
         }
 
+        this.maxIterations = maxIterations;
+        this.tipoProblema = tipoProblema;
         this.agents = new ArrayList<>();
         this.random = new Random();
     }
 
     public void initialize(int seed) {
         random.setSeed(seed);
-
         placeAgents();
         placeFood();
     }
 
     // TODO MODIFY TO PLACE ADHOC OR AI SNAKE AGENTS
     private void placeAgents() {
-        SnakeRandomAgent snakeRandomAgent = new SnakeRandomAgent(new Cell(random.nextInt(grid.length), random.nextInt(grid.length)), Color.GREEN);
-        agents.add(snakeRandomAgent);
+        //Limpar agentes e caudas
+        if(agents.size() > 0) {
+                for (SnakeAgent agent: agents) {
+                agent.getCell().setAgent(null);
+                for (Tail tail: agent.getTailList()) {
+                    tail.getCell().setTail(null);
+                }
+            }
+        }
+        agents.clear();
+        //Criar agentes
+        switch(this.tipoProblema){
+            case 0:
+                agents.add(new SnakeAdhocAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        Color.BLACK,
+                        this));
+                break;
+        }
     }
 
-    private void placeFood() {
+    protected void placeFood() {
         // TODO
+        //Limpar comida
+        if(food != null){
+            food.getCell().setFood(null);
+        }
+        food = null;
+        //Criar comida
+        Cell cell;
+        do{
+            cell = getCell(random.nextInt(getNumLines()),random.nextInt(getNumColumns()));
+        }while(cell.hasAgent() || cell.hasTail());
+        food = new Food(cell);
     }
 
     public void simulate() {
         // TODO
+        for (int i = 0; i < maxIterations && !agents.get(0).isDead(); i++) {
+            for (SnakeAgent agent : agents) {
+                agent.act();
+                fireUpdatedEnvironment();
+            }
+        }
 
         fireUpdatedEnvironment();
     }
@@ -120,5 +155,17 @@ public class Environment {
         for (EnvironmentListener listener : listeners) {
             listener.environmentUpdated();
         }
+    }
+
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
+    public int getTipoProblema() {
+        return tipoProblema;
     }
 }
