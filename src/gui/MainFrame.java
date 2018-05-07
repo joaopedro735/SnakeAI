@@ -46,20 +46,16 @@ public class MainFrame extends JFrame implements GAListener {
 
     public MainFrame() {
         try {
-            //this.tipoProblema = panelParameters.comboBoxSnakeAgents.getSelectedIndex();
-            //criarProblema();
-            //System.out.println(this.tipoProblema);
+            //criarProblema(this.tipoProblema);
             jbInit();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
     }
 
-    public SnakeProblem criarProblema() {
-        this.tipoProblema = panelParameters.comboBoxSnakeAgents.getSelectedIndex();
+    public void criarProblema() {
+        tipoProblema = panelParameters.comboBoxSnakeAgents.getSelectedIndex();
         problem = new SnakeProblem(tipoProblema);
-        System.out.println(problem);
-        return problem;
     }
 
     private void jbInit() throws Exception {

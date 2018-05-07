@@ -5,14 +5,13 @@ import snake.*;
 import java.awt.*;
 import java.util.Random;
 
-import static snake.snakeAI.ga.GeneticAlgorithm.random;
-
 public class SnakeRandomAgent extends SnakeAgent {
     // TODO
     private static final int NORTH = 0;
     private static final int SOUTH = 1;
     private static final int EAST = 2;
     private static final int WEST = 3;
+    private Random random = new Random();
 
 
     public SnakeRandomAgent(Cell cell, Color color, Environment environment) {
@@ -48,6 +47,7 @@ public class SnakeRandomAgent extends SnakeAgent {
             return Action.SOUTH;
         }
 
+        System.out.println("miau");
 
         int direction = random.nextInt(Action.values().length);
         System.out.println("Next int:" + direction);

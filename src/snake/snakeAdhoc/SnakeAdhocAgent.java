@@ -9,7 +9,7 @@ public class SnakeAdhocAgent extends SnakeAgent {
     // TODO
 
 
-    public SnakeAdhocAgent(Cell cell, Color color,Environment environment) {
+    public SnakeAdhocAgent(Cell cell, Color color, Environment environment) {
         super(cell, color,environment);
     }
 
