@@ -60,6 +60,9 @@ public class Environment {
                         Color.BLACK,
                         this));
                 break;
+            case 1:
+                agents.add(new SnakeRandomAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        Color.GREEN, this));
         }
     }
 

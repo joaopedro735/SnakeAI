@@ -50,7 +50,7 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
 
     public void jButtonSimulate_actionPerformed(ActionEvent e) {
         System.out.println("Get problem");
-        environment = mainFrame.getProblem().getEnvironment();
+        environment = mainFrame.criarProblema().getEnvironment();
         System.out.println(environment.getTipoProblema());
         environment.addEnvironmentListener(this);
 

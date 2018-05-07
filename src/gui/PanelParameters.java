@@ -81,7 +81,7 @@ public class PanelParameters extends PanelAtributesValue {
     }
 
     public void actionPerformedSelectionMethods(ActionEvent e) {
-        textFieldTournamentSize.setEnabled(comboBoxSelectionMethods.getSelectedIndex() == 0);
+        //textFieldTournamentSize.setEnabled(comboBoxSelectionMethods.getSelectedIndex() == 0);
     }
 
     public SelectionMethod<SnakeIndividual, SnakeProblem> getSelectionMethod() {
