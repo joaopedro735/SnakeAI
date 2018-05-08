@@ -6,7 +6,6 @@ import java.awt.*;
 import java.util.Random;
 
 public class SnakeRandomAgent extends SnakeAgent {
-    // TODO
     private static final int NORTH = 0;
     private static final int SOUTH = 1;
     private static final int EAST = 2;

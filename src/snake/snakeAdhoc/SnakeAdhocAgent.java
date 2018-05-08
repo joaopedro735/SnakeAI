@@ -6,7 +6,6 @@ import java.awt.*;
 
 
 public class SnakeAdhocAgent extends SnakeAgent {
-    // TODO
 
 
     public SnakeAdhocAgent(Cell cell, Color color, Environment environment) {
@@ -15,7 +14,6 @@ public class SnakeAdhocAgent extends SnakeAgent {
 
     @Override
     protected Action decide(Perception perception) {
-        // TODO
         Cell w = perception.getW();
         Cell n = perception.getN();
         Cell e = perception.getE();
