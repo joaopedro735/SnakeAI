@@ -3,7 +3,7 @@ package snake.snakeAI.ga;
 public abstract class RealVectorIndividual <P extends Problem, I extends RealVectorIndividual> extends Individual<P, I>{
     // TODO
     // a dos ga das aulas
-    //
+    //1
 
     protected double[] genome;
 
