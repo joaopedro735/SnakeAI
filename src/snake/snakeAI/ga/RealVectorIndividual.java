@@ -4,8 +4,6 @@ public abstract class RealVectorIndividual <P extends Problem, I extends RealVec
     // TODO
     // a dos ga das aulas
     //
-    public static final boolean ONE = true;
-    public static final boolean ZERO = false;
 
     protected double[] genome;
 
