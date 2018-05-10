@@ -6,7 +6,6 @@ import java.awt.*;
 import java.util.Random;
 
 public class SnakeRandomAgent extends SnakeAgent {
-    // TODO
     private static final int NORTH = 0;
     private static final int SOUTH = 1;
     private static final int EAST = 2;
@@ -34,6 +33,7 @@ public class SnakeRandomAgent extends SnakeAgent {
         // senão se puder ir para oeste E tiver lixo
         //  vai para oeste
 
+        //Rule #1
         if (w != null && !w.hasTail() && !w.hasAgent() && w.hasFood()) {
             return Action.WEST;
         }
@@ -47,7 +47,10 @@ public class SnakeRandomAgent extends SnakeAgent {
             return Action.SOUTH;
         }
 
-
+        //Rule #2
+        //NORTH = 0, SOUTH = 1, EAST = 2, WEST = 3;
+        //Random number between 0 and 3 and switch case
+        //if chosen direction is impossible, try the next set of rules
         int direction = random.nextInt(Action.values().length);
         System.out.println("Next int:" + direction);
         switch (direction) {
@@ -74,8 +77,8 @@ public class SnakeRandomAgent extends SnakeAgent {
 
         }
 
+        //Rule #3
         // se puder ir para norte (não está na linha 1 e
-
         if (w != null && !w.hasTail() && !w.hasAgent()) {
             return Action.WEST;
         }

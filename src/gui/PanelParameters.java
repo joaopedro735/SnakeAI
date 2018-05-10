@@ -81,7 +81,11 @@ public class PanelParameters extends PanelAtributesValue {
     }
 
     public void actionPerformedSelectionMethods(ActionEvent e) {
-        //textFieldTournamentSize.setEnabled(comboBoxSelectionMethods.getSelectedIndex() == 0);
+        textFieldTournamentSize.setEnabled(comboBoxSelectionMethods.getSelectedIndex() == 0);
+    }
+
+    public void actionPerformedSelectionAgent(ActionEvent e) {
+
     }
 
     public SelectionMethod<SnakeIndividual, SnakeProblem> getSelectionMethod() {
@@ -144,7 +148,7 @@ class JComboBoxSnakeMethods_ActionAdapter implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        adaptee.actionPerformedSelectionMethods(e);
+        adaptee.actionPerformedSelectionAgent(e);
     }
 }
 
