@@ -53,6 +53,8 @@ public class SnakeExperimentsFactory extends ExperimentsFactory {
                 break;
             case "uniform":
                 recombination = new RecombinationUniform<>(recombinationProbability);
+            case "four_choices":
+                recombination = new RecombinationUniform<>(recombinationProbability);
         }
 
         // TODO YOU MAY ADD NEW PARAMETERS (eg., NEW GENETIC OPERATORS, ...).
@@ -63,7 +65,7 @@ public class SnakeExperimentsFactory extends ExperimentsFactory {
         double mutationProbability = Double.parseDouble(getParameterValue("Mutation probability"));
         if (getParameterValue("Mutation").equals("uniform_distribution")) {
             //TODO OTHER PARAMETERS TO YOUR MUTATION OPERATOR, IF THEY EXIST, ARE FETCHED HERE
-            mutation = new MutationMUTATION_NAME<>(mutationProbability /*TODO COMPLETE?*/);
+            mutation = new MutationFourChoices<>(mutationProbability /*TODO COMPLETE?*/);
         }
 
         //PROBLEM 

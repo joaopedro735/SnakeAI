@@ -46,7 +46,6 @@ public class MainFrame extends JFrame implements GAListener {
 
     public MainFrame() {
         try {
-            //criarProblema(this.tipoProblema);
             jbInit();
         } catch (Exception e) {
             e.printStackTrace(System.err);
