@@ -1,5 +1,6 @@
 package snake;
 
+import snake.snakeAI.nn.SnakeAIAgent;
 import snake.snakeAdhoc.SnakeAdhocAgent;
 import snake.snakeRandom.SnakeRandomAgent;
 
@@ -14,6 +15,8 @@ public class Environment {
     private final Cell[][] grid;
     private final List<SnakeAgent> agents;
     private Food food;
+    private int foods;
+    private int movements;
     private final int maxIterations;
     private int tipoProblema;
 
@@ -83,13 +86,15 @@ public class Environment {
 
     public void simulate() {
         // TODO
+        int moves = 0;
         for (int i = 0; i < maxIterations && !agents.get(0).isDead(); i++) {
             for (SnakeAgent agent : agents) {
                 agent.act();
                 fireUpdatedEnvironment();
+                moves++;
             }
         }
-
+        setMovements(moves);
         fireUpdatedEnvironment();
     }
 
@@ -170,5 +175,33 @@ public class Environment {
 
     public int getTipoProblema() {
         return tipoProblema;
+    }
+
+    public void setWeights(double[] genome) {
+        for (SnakeAIAgent agent: getSnakes()) {
+            agent.setWeights(genome);
+        }
+    }
+
+    public ArrayList<SnakeAIAgent> getSnakes() {
+        ArrayList<SnakeAIAgent> snakes = new ArrayList<>();
+        snakes.add((SnakeAIAgent) agents);
+        return snakes;
+    }
+
+    public int getFoods() {
+        return foods;
+    }
+
+    public void setFoods(int value) {
+        foods = value;
+    }
+
+    public int getMovements() {
+        return movements;
+    }
+
+    public void setMovements(int value) {
+        movements = value;
     }
 }

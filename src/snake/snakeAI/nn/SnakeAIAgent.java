@@ -1,6 +1,9 @@
 package snake.snakeAI.nn;
 
 import snake.*;
+import snake.snakeAI.ga.Individual;
+import snake.snakeAI.ga.RealVectorIndividual;
+import snake.snakeAI.ga.geneticOperators.MutationFourChoices;
 
 import java.awt.Color;
 
@@ -56,21 +59,59 @@ public class SnakeAIAgent extends SnakeAgent {
      * @param weights vector of weights comming from the individual.
      */
     public void setWeights(double[] weights) {
-        // TODO
-    }
+        // TODO: recebe o genoma e divide em w1 e w2
+        int k = 0;
+        //w1
+        for (int i = 0; i < inputLayerSize; i++) {
+            for (int j = 0; j < hiddenLayerSize; j++) {
+                w1[i][j] = weights[k];
+                k++;
+            }
+        }
+        for (int i = 0; i < hiddenLayerSize + 1; i++) {
+            for (int j = 0; j < outputLayerSize; j++) {
+                w2[i][j] = weights[k];
+                k++;
+            }
+        }
+}
     
     /**
      * Computes the output of the network for the inputs saved in the class
      * vector "inputs".
      *
      */
-    private void forwardPropagation() {
+    private void forwardPropagation(double[] instance) {
         // TODO
+        for (int i = 0; i < hiddenLayerSize; i++) { // percorre os neurónios da camda
+            double somapesada = 0;
+            for (int j = 0; j < inputLayerSize; j++) { // percorre os inputs
+                somapesada += instance[j] * w1[j][i];
+            }
+
+            hiddenLayerOutput[i] = sigmoidFunction(somapesada);
+        }
+
+        for (int i = 0; i < outputLayerSize; i++) {
+            double somapesada = 0;
+
+            for (int j = 0; j < hiddenLayerSize + 1; j++) {
+                somapesada += hiddenLayerOutput[j] * w2[j][i];
+            }
+
+            output[i] = /*float para devolver int*/Math.round((float) sigmoidFunction(somapesada));
+        }
+    }
+
+    private double sigmoidFunction(double somapesada) {
+        return 1 / (1 + Math.exp(-somapesada));
     }
 
     @Override
     protected Action decide(Perception perception) {
-        // TODO
+        // TODO: caixa fechada
+
+
         return null;
     }
 }

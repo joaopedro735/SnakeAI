@@ -1,32 +1,22 @@
 package snake.snakeAI.ga;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public abstract class RealVectorIndividual <P extends Problem, I extends RealVectorIndividual> extends Individual<P, I>{
     // TODO
     // a dos ga das aulas
-    //
-    private static final int NORTH = 0;
-    private static final int SOUTH = 1;
-    private static final int EAST = 2;
-    private static final int WEST = 3;
-
-
-
+    public static final int ONE = 1;
+    public static final int ZERO = 0;
     protected double[] genome;
 
     public RealVectorIndividual(P problem, int size) {
         super(problem);
-        // TODO
         genome = new double[size];
         for (int g = 0; g < genome.length; g++) {
-            genome[g] = ThreadLocalRandom.current().nextDouble(0, 3);
+            genome[g] = (((GeneticAlgorithm.random.nextDouble())*2) - 1) > 0 ? ONE : ZERO;
         }
     }
 
     public RealVectorIndividual(RealVectorIndividual<P, I> original) {
         super(original);
-        // TODO
         this.genome = new double[original.genome.length];
         System.arraycopy(original.genome, 0, genome, 0, genome.length);
     }
@@ -52,6 +42,5 @@ public abstract class RealVectorIndividual <P extends Problem, I extends RealVec
         // TODO
         double aux = genome[index];
         genome[index] = other.genome[index];
-        other.genome[index] = aux;
-    }
+        other.genome[index] = aux;}
 }

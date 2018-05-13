@@ -8,6 +8,7 @@ public abstract class SnakeAgent {
     protected Cell cell;
     protected Color color;
     protected Environment environment;
+    private int foods = 0;
 
     public ArrayList<Tail> getTailList() {
         return tailList;
@@ -81,9 +82,11 @@ public abstract class SnakeAgent {
             {
                 nextCell.setFood(null);
                 environment.placeFood();
+                foods++;
             }
         }
         else{
+            environment.setFoods(foods);
             isDead = true;
             System.out.println(isDead);
         }

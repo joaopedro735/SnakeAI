@@ -119,4 +119,8 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
         return sb.toString();
     }
 
+
+    public Environment setEnvironment() {
+        return this.environment;
+    }
 }
