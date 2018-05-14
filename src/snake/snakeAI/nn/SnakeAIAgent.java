@@ -81,26 +81,33 @@ public class SnakeAIAgent extends SnakeAgent {
      * vector "inputs".
      *
      */
-    private void forwardPropagation(double[] instance) {
+    private void forwardPropagation() {
         // TODO
         for (int i = 0; i < hiddenLayerSize; i++) { // percorre os neurónios da camda
             double somapesada = 0;
             for (int j = 0; j < inputLayerSize; j++) { // percorre os inputs
-                somapesada += instance[j] * w1[j][i];
+                somapesada += inputs[j] * w1[j][i];
             }
 
             hiddenLayerOutput[i] = sigmoidFunction(somapesada);
         }
-
+        int maior = 0;
+        double maiorSum = Double.MIN_VALUE;
         for (int i = 0; i < outputLayerSize; i++) {
             double somapesada = 0;
 
             for (int j = 0; j < hiddenLayerSize + 1; j++) {
                 somapesada += hiddenLayerOutput[j] * w2[j][i];
+
+            }
+            output[i] = 0;
+            if(somapesada > maiorSum){
+                maiorSum = somapesada;
+                maior = i;
             }
 
-            output[i] = /*float para devolver int*/Math.round((float) sigmoidFunction(somapesada));
         }
+        output[maior] = 1;
     }
 
     private double sigmoidFunction(double somapesada) {
@@ -110,7 +117,16 @@ public class SnakeAIAgent extends SnakeAgent {
     @Override
     protected Action decide(Perception perception) {
         // TODO: caixa fechada
-
+        //preencher os inputs;
+        forwardPropagation();
+        if(output[0]==1)
+            return Action.NORTH;
+        if(output[1]==1)
+            return Action.NORTH;
+        if(output[2]==1)
+            return Action.NORTH;
+        if(output[3]==1)
+            return Action.NORTH;
 
         return null;
     }

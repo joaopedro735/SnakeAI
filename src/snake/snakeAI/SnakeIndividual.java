@@ -16,6 +16,9 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
 
     public SnakeIndividual(SnakeIndividual original) {
         super(original);
+        fitness = original.fitness;
+        foods = original.foods;
+        movements = original.movements;
         //TODO
     }
 
@@ -23,24 +26,26 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
     public double computeFitness() {
         //TODO:coloco a mover 500x *10simulacoes (para 10 seeds(pos inicial, valores de pessos))
         Environment environment = problem.setEnvironment();
+        movements=0;
+        foods=0;
+        fitness=0;
         for (int i = 0; i < problem.getNumEvironmentSimulations(); i++) {
             //TODO: seed needs initialization ?????
-            int seed = 0;
-            environment.initialize(seed);
-            ///environment.setWeights(genome);
-            environment.getSnakes().get(i).setWeights(genome);
+
+            environment.initialize(i);
+            environment.setWeights(genome);
             environment.simulate();
-            //TODO: fitness ?????? "+= 0 " está errado
-            fitness += 0;
+            foods += environment.getFoods();
+            movements += environment.getMovements();
+            fitness = foods*1000 + movements;
         }
-        foods = environment.getFoods();
-        movements = environment.getMovements();
-        return 0;
+
+        return fitness;
     }
 
     public double[] getGenome(){
         //TODO
-        return null;
+        return genome;
     }
 
     @Override
@@ -49,9 +54,9 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
         sb.append("\nfitness: ");
         sb.append(fitness);
         sb.append("\nmovimentos: ");
-        sb.append(foods);
+        sb.append((double) foods/problem.getNumEvironmentSimulations());
         sb.append("\ncomidas: ");
-        sb.append(movements);
+        sb.append((double) movements/problem.getNumEvironmentSimulations());
         //TODO
         return sb.toString();
     }
@@ -64,7 +69,10 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
      */
     @Override
     public int compareTo(SnakeIndividual i) {
-        //TODO
+        if(fitness > i.fitness)
+            return 1;
+        if(fitness < i.fitness)
+            return -1;
         return 0;
     }
 

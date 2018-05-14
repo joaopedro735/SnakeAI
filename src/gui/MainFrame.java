@@ -41,6 +41,11 @@ public class MainFrame extends JFrame implements GAListener {
     private XYSeries seriesBestIndividual;
     private XYSeries seriesAverage;
     private SwingWorker<Void, Void> worker;
+
+    public int getTipoProblema() {
+        return tipoProblema;
+    }
+
     private int tipoProblema;
     private PanelSimulation simulationPanel;
 

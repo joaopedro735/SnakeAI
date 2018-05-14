@@ -3,15 +3,14 @@ package snake.snakeAI.ga;
 public abstract class RealVectorIndividual <P extends Problem, I extends RealVectorIndividual> extends Individual<P, I>{
     // TODO
     // a dos ga das aulas
-    public static final int ONE = 1;
-    public static final int ZERO = 0;
+
     protected double[] genome;
 
     public RealVectorIndividual(P problem, int size) {
         super(problem);
         genome = new double[size];
         for (int g = 0; g < genome.length; g++) {
-            genome[g] = (((GeneticAlgorithm.random.nextDouble())*2) - 1) > 0 ? ONE : ZERO;
+            genome[g] = GeneticAlgorithm.random.nextDouble()*2 - 1 ;
         }
     }
 
