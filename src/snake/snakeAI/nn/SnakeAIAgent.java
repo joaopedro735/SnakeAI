@@ -1,9 +1,6 @@
 package snake.snakeAI.nn;
 
 import snake.*;
-import snake.snakeAI.ga.Individual;
-import snake.snakeAI.ga.RealVectorIndividual;
-import snake.snakeAI.ga.geneticOperators.MutationFourChoices;
 
 import java.awt.Color;
 
@@ -118,16 +115,80 @@ public class SnakeAIAgent extends SnakeAgent {
     protected Action decide(Perception perception) {
         // TODO: caixa fechada
         //preencher os inputs;
+
+        //
+        int directions[] = possibleMoves(perception);
+        int foodDir[] = findFood(perception);
+        int k = 0;
+        for (int i = k; i < 4; i++, k++) {
+            inputs[i] = directions[k];
+        }
+        for (int i = k; i < 8; i++, k++) {
+            inputs[i] = foodDir[k];
+        }
+
+
         forwardPropagation();
         if(output[0]==1)
             return Action.NORTH;
         if(output[1]==1)
-            return Action.NORTH;
+            return Action.SOUTH;
         if(output[2]==1)
-            return Action.NORTH;
+            return Action.WEST;
         if(output[3]==1)
-            return Action.NORTH;
+            return Action.EAST;
 
         return null;
+    }
+
+    private int[] findFood(Perception perception) {
+        int[] result = new int[4];
+        Cell w = perception.getW();
+        Cell n = perception.getN();
+        Cell e = perception.getE();
+        Cell s = perception.getS();
+
+        if (n.hasFood()) {
+            result[0] = 1;
+        }
+
+        if (s.hasFood()) {
+            result[1] = 1;
+        }
+
+        if (w.hasFood()) {
+            result[2] = 1;
+        }
+
+        if (e.hasFood()) {
+            result[3] = 1;
+        }
+        return result;
+    }
+
+    private int[] possibleMoves(Perception perception) {
+        int[] result = new int[4];
+        Cell w = perception.getW();
+        Cell n = perception.getN();
+        Cell e = perception.getE();
+        Cell s = perception.getS();
+
+        if (n != null && !n.hasTail() && !n.hasAgent()) {
+            result[0] = 1;
+        }
+
+        if (s != null && !s.hasTail() && !s.hasAgent()) {
+            result[1] = 1;
+        }
+
+        if (w != null && !w.hasTail() && !w.hasAgent()) {
+            result[2] = 1;
+        }
+
+        if (e != null && !e.hasTail() && !e.hasAgent()) {
+            result[3] = 1;
+        }
+
+        return result;
     }
 }
