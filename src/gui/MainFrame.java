@@ -60,7 +60,7 @@ public class MainFrame extends JFrame implements GAListener {
     public void criarProblema() {
         tipoProblema = panelParameters.comboBoxSnakeAgents.getSelectedIndex();
         if(tipoProblema > 1)
-            problem = new SnakeProblem(10,500,8,10,tipoProblema);
+            problem = new SnakeProblem(10,500,9,10,tipoProblema);
         else
             problem = new SnakeProblem(tipoProblema);
     }
