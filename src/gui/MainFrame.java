@@ -41,13 +41,13 @@ public class MainFrame extends JFrame implements GAListener {
     private XYSeries seriesBestIndividual;
     private XYSeries seriesAverage;
     private SwingWorker<Void, Void> worker;
+    private int tipoProblema;
+    private PanelSimulation simulationPanel;
 
     public int getTipoProblema() {
         return tipoProblema;
     }
 
-    private int tipoProblema;
-    private PanelSimulation simulationPanel;
 
     public MainFrame() {
         try {
@@ -59,7 +59,10 @@ public class MainFrame extends JFrame implements GAListener {
 
     public void criarProblema() {
         tipoProblema = panelParameters.comboBoxSnakeAgents.getSelectedIndex();
-        problem = new SnakeProblem(tipoProblema);
+        if(tipoProblema > 1)
+            problem = new SnakeProblem(10,500,8,10,tipoProblema);
+        else
+            problem = new SnakeProblem(tipoProblema);
     }
 
     private void jbInit() throws Exception {

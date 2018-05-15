@@ -74,6 +74,7 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
                 int environmentSimulations = mainFrame.getProblem().getNumEvironmentSimulations();
                 System.out.println(environmentSimulations);
                 for (int i = 0; i < environmentSimulations; i++) {
+                    System.out.println(mainFrame.getTipoProblema());
                     System.out.println("Initialize");
                     environment.initialize(i);
 

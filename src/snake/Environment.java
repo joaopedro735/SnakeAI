@@ -85,6 +85,9 @@ public class Environment {
             case 1:
                 agents.add(new SnakeRandomAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
                         Color.GREEN, this));
+            case 2:
+                agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        numInputs, numHiddenUnits,numOutputs));
         }
     }
 
@@ -197,15 +200,13 @@ public class Environment {
     }
 
     public void setWeights(double[] genome) {
-        for (SnakeAIAgent agent: getSnakes()) {
-            agent.setWeights(genome);
-        }
+        //TODO para cada agente setWeights
+        CSDFOIVOÇHSDVN
     }
 
-    public ArrayList<SnakeAIAgent> getSnakes() {
-        ArrayList<SnakeAIAgent> snakes = new ArrayList<>();
-        snakes.add((SnakeAIAgent) agents);
-        return snakes;
+    public List<SnakeAIAgent> getSnakes() {
+        //TODO devolver snakeAIagents
+        EROROIESOIDN
     }
 
     public int getFoods() {

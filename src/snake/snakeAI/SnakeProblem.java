@@ -26,18 +26,20 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
             int environmentSize,
             int maxIterations,
             int numHiddenUnits,
-            int numEnvironmentRuns) {
+            int numEnvironmentRuns,
+            int tipoProblema) {
+        System.out.println("Construtor AI");
         this.environmentSize = environmentSize;
         this.maxIterations = maxIterations;
         this.numInputs = NUM_NN_INPUTS;
         this.numHiddenUnits = numHiddenUnits;
         this.numOutputs = NUM_NN_OUTPUTS;
         this.numEnvironmentRuns = numEnvironmentRuns;
-
+        this.tipoProblema = tipoProblema;
         GENOME_SIZE=numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
-        environment = new Environment(
-                environmentSize,
-                maxIterations,-1);
+
+        environment = new Environment(environmentSize,
+                maxIterations,tipoProblema,numInputs,numHiddenUnits,numOutputs);
     }
 
     public SnakeProblem(int tipoProblema) {
@@ -46,7 +48,6 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
         this.environmentSize = 10;
         System.out.println("Construtor adhoc/random");
         environment = new Environment(
-
                 environmentSize,
                 maxIterations,
                 tipoProblema);
@@ -88,12 +89,12 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
         int maxIterations = Integer.parseInt(parametersValues.get(1));
         int numHiddenUnits = Integer.parseInt(parametersValues.get(2));
         int numEnvironmentRuns = Integer.parseInt(parametersValues.get(3));
-
         return new SnakeProblem(
                 environmentSize,
                 maxIterations,
                 numHiddenUnits,
-                numEnvironmentRuns);
+                numEnvironmentRuns,
+                2);
     }
 
     // MODIFY IF YOU DEFINE OTHER PARAMETERS

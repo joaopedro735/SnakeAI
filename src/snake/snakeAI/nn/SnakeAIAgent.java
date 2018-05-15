@@ -120,14 +120,13 @@ public class SnakeAIAgent extends SnakeAgent {
         //preencher os inputs;
         forwardPropagation();
         if(output[0]==1)
-            return Action.NORTH;
+            return Action.WEST;
         if(output[1]==1)
             return Action.NORTH;
         if(output[2]==1)
-            return Action.NORTH;
+            return Action.EAST;
         if(output[3]==1)
-            return Action.NORTH;
-
+            return Action.SOUTH;
         return null;
     }
 }
