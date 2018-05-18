@@ -1,5 +1,6 @@
 package snake;
 
+import com.sun.org.apache.bcel.internal.generic.GETFIELD;
 import gui.PanelSimulation;
 import snake.snakeAI.nn.SnakeAIAgent;
 import snake.snakeAdhoc.SnakeAdhocAgent;
@@ -72,8 +73,10 @@ public class Environment {
                 for (Tail tail: agent.getTailList()) {
                     tail.getCell().setTail(null);
                 }
+                agent.getTailList().clear();
             }
         }
+
         agents.clear();
         //Criar agentes
         switch(this.tipoProblema){
@@ -85,11 +88,17 @@ public class Environment {
             case 1:
                 agents.add(new SnakeRandomAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
                         Color.GREEN, this));
+                break;
+            case 2:
+                agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        numInputs, numHiddenUnits,numOutputs));
+                break;
         }
     }
 
     protected void placeFood() {
         // TODO
+        System.out.println("food");
         //Limpar comida
         if(food != null){
             food.getCell().setFood(null);
@@ -106,6 +115,7 @@ public class Environment {
     public void simulate() {
         // TODO
         int moves = 0;
+        System.out.println("simulate");
         for (int i = 0; i < maxIterations && !agents.get(0).isDead(); i++) {
             for (SnakeAgent agent : agents) {
                 agent.act();
@@ -197,15 +207,17 @@ public class Environment {
     }
 
     public void setWeights(double[] genome) {
-        for (SnakeAIAgent agent: getSnakes()) {
-            agent.setWeights(genome);
+        //TODO para cada agente setWeights
+        for (SnakeAIAgent agentAI: getSnakes()) {
+            agentAI.setWeights(genome);
         }
     }
 
-    public ArrayList<SnakeAIAgent> getSnakes() {
-        ArrayList<SnakeAIAgent> snakes = new ArrayList<>();
-        snakes.add((SnakeAIAgent) agents);
-        return snakes;
+    public List<SnakeAIAgent> getSnakes() {
+        //TODO devolver snakeAIagents
+        ArrayList<SnakeAIAgent> agentsAI = new ArrayList<>();
+        agentsAI.add((SnakeAIAgent) agents.get(0));
+        return agentsAI;
     }
 
     public int getFoods() {
