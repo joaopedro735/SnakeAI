@@ -1,7 +1,5 @@
 package snake;
 
-import com.sun.org.apache.bcel.internal.generic.GETFIELD;
-import gui.PanelSimulation;
 import snake.snakeAI.nn.SnakeAIAgent;
 import snake.snakeAdhoc.SnakeAdhocAgent;
 import snake.snakeRandom.SnakeRandomAgent;

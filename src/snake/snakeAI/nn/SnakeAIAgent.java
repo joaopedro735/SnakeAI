@@ -135,7 +135,7 @@ public class SnakeAIAgent extends SnakeAgent {
         if(output[0]==1)
             return Action.WEST;
         if(output[1]==1)
-            return Action.SOUTH;
+            return Action.NORTH;
         if(output[2]==1)
             return Action.EAST;
         if(output[3]==1)

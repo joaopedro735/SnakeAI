@@ -76,7 +76,8 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
                 for (int i = 0; i < environmentSimulations; i++) {
                     environment.initialize(i);
                     if(mainFrame.getTipoProblema()>1)
-                        mainFrame.getProblem().getEnvironment().setWeights(mainFrame.getBestInRun().getGenome());
+                        //getBestInRun == null, nao passa daqui
+                        mainFrame.getProblem().getEnvironment().setWeights(mainFrame.getBestInRun().getGenome()); //fixme
                     environmentUpdated();
                     environment.simulate();
                 }
