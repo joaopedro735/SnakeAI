@@ -115,4 +115,7 @@ public abstract class SnakeAgent {
     public void setDead(boolean dead) {
         isDead = dead;
     }
+
+
+    public void setWeights(double[] genome){};
 }

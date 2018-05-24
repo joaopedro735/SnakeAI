@@ -38,8 +38,9 @@ public class SnakeAIAgent extends SnakeAgent {
             Cell cell,
             int inputLayerSize,
             int hiddenLayerSize,
-            int outputLayerSize) {
-        super(cell, Color.BLUE,null);
+            int outputLayerSize,
+            Environment environment) {
+        super(cell, Color.BLUE,environment);
         this.inputLayerSize = inputLayerSize;
         this.hiddenLayerSize = hiddenLayerSize;
         this.outputLayerSize = outputLayerSize;
@@ -58,6 +59,7 @@ public class SnakeAIAgent extends SnakeAgent {
      * 
      * @param weights vector of weights comming from the individual.
      */
+    @Override
     public void setWeights(double[] weights) {
         // TODO: recebe o genoma e divide em w1 e w2
         int k = 0;
@@ -73,8 +75,7 @@ public class SnakeAIAgent extends SnakeAgent {
                 w2[i][j] = weights[k];
                 k++;
             }
-        }
-}
+        } }
     
     /**
      * Computes the output of the network for the inputs saved in the class
@@ -118,19 +119,7 @@ public class SnakeAIAgent extends SnakeAgent {
     protected Action decide(Perception perception) {
         // TODO: caixa fechada
         //preencher os inputs;
-
-        //
-        int directions[] = possibleMoves(perception);
-        int foodDir[] = findFood(perception);
-        int k = 0;
-        for (int i = k; i < 4; i++, k++) {
-            inputs[i] = directions[k];
-        }
-        for (int i = k; i < 8; i++, k++) {
-            inputs[i] = foodDir[k];
-        }
-
-
+        preencherInputs(perception);
         forwardPropagation();
         if(output[0]==1)
             return Action.WEST;
@@ -143,54 +132,44 @@ public class SnakeAIAgent extends SnakeAgent {
         return null;
     }
 
-    private int[] findFood(Perception perception) {
-        int[] result = new int[4];
+    private void preencherInputs(Perception perception) {
         Cell w = perception.getW();
         Cell n = perception.getN();
         Cell e = perception.getE();
         Cell s = perception.getS();
 
-        if (n.hasFood()) {
-            result[0] = 1;
-        }
-
-        if (s.hasFood()) {
-            result[1] = 1;
-        }
-
-        if (w.hasFood()) {
-            result[2] = 1;
-        }
-
-        if (e.hasFood()) {
-            result[3] = 1;
-        }
-        return result;
-    }
-
-    private int[] possibleMoves(Perception perception) {
-        int[] result = new int[4];
-        Cell w = perception.getW();
-        Cell n = perception.getN();
-        Cell e = perception.getE();
-        Cell s = perception.getS();
-
+        //Pode ir para NORTE
         if (n != null && !n.hasTail() && !n.hasAgent()) {
-            result[0] = 1;
+            inputs[0] = 1;
         }
-
-        if (s != null && !s.hasTail() && !s.hasAgent()) {
-            result[1] = 1;
-        }
-
-        if (w != null && !w.hasTail() && !w.hasAgent()) {
-            result[2] = 1;
-        }
-
+        //Pode ir para ESTE
         if (e != null && !e.hasTail() && !e.hasAgent()) {
-            result[3] = 1;
+            inputs[1] = 1;
+        }
+        //Pode ir para SUL
+        if (s != null && !s.hasTail() && !s.hasAgent()) {
+            inputs[2] = 1;
+        }
+        //Pode ir para OESTE
+        if (w != null && !w.hasTail() && !w.hasAgent()) {
+            inputs[3] = 1;
+        }
+        //Posição da comida: acima?
+        if (environment.getFood().getCell().getLine() > getCell().getLine()) {
+            inputs[4] = 1;
+        }
+        //Posição da comida: à direita?
+        if (environment.getFood().getCell().getColumn() > getCell().getColumn()) {
+            inputs[5] = 1;
+        }
+        //Posição da comida: abaixo?
+        if (environment.getFood().getCell().getLine() < getCell().getLine()) {
+            inputs[6] = 1;
+        }
+        //Posição da comida: à esquerda?
+        if (environment.getFood().getCell().getColumn() < getCell().getColumn()) {
+            inputs[7] = 1;
         }
 
-        return result;
     }
 }

@@ -16,6 +16,7 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
 
     public SnakeIndividual(SnakeIndividual original) {
         super(original);
+        //Substituição das variaveis do novo pq nao é feito no clone
         fitness = original.fitness;
         foods = original.foods;
         movements = original.movements;
@@ -24,7 +25,7 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
 
     @Override
     public double computeFitness() {
-        //TODO:coloco a mover 500x *10simulacoes (para 10 seeds(pos inicial, valores de pessos))
+        //TODO:coloco a mover 500x * 10simulacoes (para 10 seeds)
         Environment environment = problem.setEnvironment();
         movements=0;
         foods=0;

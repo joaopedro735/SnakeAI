@@ -21,7 +21,7 @@ public class Environment {
     private int tipoProblema;
     private int numInputs;
     private int numHiddenUnits;
-    public int numOutputs;
+    private int numOutputs;
 
     public Environment(
             int size,
@@ -89,14 +89,13 @@ public class Environment {
                 break;
             case 2:
                 agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
-                        numInputs, numHiddenUnits,numOutputs));
+                        numInputs, numHiddenUnits,numOutputs,this));
                 break;
         }
     }
 
     protected void placeFood() {
         // TODO
-        System.out.println("food");
         //Limpar comida
         if(food != null){
             food.getCell().setFood(null);
@@ -206,16 +205,13 @@ public class Environment {
 
     public void setWeights(double[] genome) {
         //TODO para cada agente setWeights
-        for (SnakeAIAgent agentAI: getSnakes()) {
-            agentAI.setWeights(genome);
-        }
+        List<SnakeAgent> agents = getSnakes();
+        agents.get(0).setWeights(genome);
     }
 
-    public List<SnakeAIAgent> getSnakes() {
-        //TODO devolver snakeAIagents
-        ArrayList<SnakeAIAgent> agentsAI = new ArrayList<>();
-        agentsAI.add((SnakeAIAgent) agents.get(0));
-        return agentsAI;
+    public List<SnakeAgent> getSnakes() {
+        //TODO devolver snakeAgents
+        return agents;
     }
 
     public int getFoods() {
