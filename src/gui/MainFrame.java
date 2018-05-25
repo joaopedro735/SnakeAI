@@ -25,13 +25,13 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class MainFrame extends JFrame implements GAListener {
 
     private static final long serialVersionUID = 1L;
-    private SnakeProblem problem;
+    private SnakeProblem problem= new SnakeProblem(0);
     private GeneticAlgorithm<SnakeIndividual, SnakeProblem> ga;
     private SnakeIndividual bestInRun;
     private SnakeExperimentsFactory experimentsFactory;
     private PanelTextArea problemPanel;
     private PanelTextArea bestIndividualPanel;
-    private PanelParameters panelParameters = new PanelParameters();
+    private PanelParameters panelParameters = new PanelParameters(this);
     private JButton buttonDataSet = new JButton("Data set");
     private JButton buttonRun = new JButton("Run");
     private JButton buttonStop = new JButton("Stop");
@@ -59,9 +59,7 @@ public class MainFrame extends JFrame implements GAListener {
 
     public void criarProblema() {
         tipoProblema = panelParameters.comboBoxSnakeAgents.getSelectedIndex();
-        if(tipoProblema > 1)
-            problem = new SnakeProblem(10,500,9,10,tipoProblema);
-        else
+        if(tipoProblema <= 1)
             problem = new SnakeProblem(tipoProblema);
     }
 

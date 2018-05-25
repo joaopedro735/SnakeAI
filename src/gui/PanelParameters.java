@@ -40,7 +40,9 @@ public class PanelParameters extends PanelAtributesValue {
     String[] snakeAgents = {"Ad-Hoc Snake", "Random Snake", "AI Snake"};
     JComboBox comboBoxSnakeAgents = new JComboBox(snakeAgents);
 
-    public PanelParameters() {
+    private MainFrame mainFrame;
+    public PanelParameters(MainFrame mainFrame) {
+        this.mainFrame=mainFrame;
         title = "Genetic algorithm parameters";
 
         labels.add(new JLabel("Seed: "));
@@ -85,6 +87,8 @@ public class PanelParameters extends PanelAtributesValue {
     }
 
     public void actionPerformedSelectionAgent(ActionEvent e) {
+
+        mainFrame.criarProblema();
 
     }
 

@@ -32,14 +32,14 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
         fitness=0;
         for (int i = 0; i < problem.getNumEvironmentSimulations(); i++) {
             //TODO: seed needs initialization ?????
-
             environment.initialize(i);
             environment.setWeights(genome);
             environment.simulate();
             foods += environment.getFoods();
             movements += environment.getMovements();
-            fitness = foods*1000 + movements;
+
         }
+        fitness = foods*1000 + movements;
 
         return fitness;
     }
@@ -55,9 +55,9 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
         sb.append("\nfitness: ");
         sb.append(fitness);
         sb.append("\nmovimentos: ");
-        sb.append((double) foods/problem.getNumEvironmentSimulations());
-        sb.append("\ncomidas: ");
         sb.append((double) movements/problem.getNumEvironmentSimulations());
+        sb.append("\ncomidas: ");
+        sb.append((double) foods/problem.getNumEvironmentSimulations());
         //TODO
         return sb.toString();
     }

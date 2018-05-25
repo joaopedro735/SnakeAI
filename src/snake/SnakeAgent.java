@@ -40,6 +40,10 @@ public abstract class SnakeAgent {
                 environment.getWestCell(cell));
     }
 
+    public int getFoods() {
+        return foods;
+    }
+
     protected void execute(Action action)
     {
         // TODO
@@ -86,9 +90,7 @@ public abstract class SnakeAgent {
             }
         }
         else{
-            environment.setFoods(foods);
             isDead = true;
-            System.out.println(isDead);
         }
     }
 
@@ -117,5 +119,5 @@ public abstract class SnakeAgent {
     }
 
 
-    public void setWeights(double[] genome){};
+
 }

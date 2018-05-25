@@ -110,19 +110,22 @@ public class Environment {
     }
 
     public void simulate() {
-        // TODO
-        int moves = 0;
-        System.out.println("simulate");
-        for (int i = 0; i < maxIterations && !agents.get(0).isDead(); i++) {
+
+        foods=0;
+        int i;
+        for ( i = 0; i < maxIterations && !agents.get(0).isDead(); i++) {
             for (SnakeAgent agent : agents) {
                 agent.act();
                 fireUpdatedEnvironment();
-                moves++;
             }
         }
-        setMovements(moves);
-        fireUpdatedEnvironment();
+        setMovements(i);
+        setFoods(agents.get(0).getFoods());
     }
+
+
+
+
 
     public int getSize() {
         return grid.length;
@@ -205,8 +208,7 @@ public class Environment {
 
     public void setWeights(double[] genome) {
         //TODO para cada agente setWeights
-        List<SnakeAgent> agents = getSnakes();
-        agents.get(0).setWeights(genome);
+        ((SnakeAIAgent)agents.get(0)).setWeights(genome);
     }
 
     public List<SnakeAgent> getSnakes() {
