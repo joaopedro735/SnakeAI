@@ -22,6 +22,7 @@ public class Environment {
     private int numInputs;
     private int numHiddenUnits;
     private int numOutputs;
+    public boolean stop;
 
     public Environment(
             int size,
@@ -113,7 +114,7 @@ public class Environment {
 
         foods=0;
         int i;
-        for ( i = 0; i < maxIterations && !agents.get(0).isDead(); i++) {
+        for ( i = 0; i < maxIterations && !stop; i++) {
             for (SnakeAgent agent : agents) {
                 agent.act();
                 fireUpdatedEnvironment();
@@ -122,10 +123,6 @@ public class Environment {
         setMovements(i);
         setFoods(agents.get(0).getFoods());
     }
-
-
-
-
 
     public int getSize() {
         return grid.length;
