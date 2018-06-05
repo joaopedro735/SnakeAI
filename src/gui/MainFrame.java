@@ -59,7 +59,12 @@ public class MainFrame extends JFrame implements GAListener {
 
     public void criarProblema() {
         tipoProblema = panelParameters.comboBoxSnakeAgents.getSelectedIndex();
-        if(tipoProblema <= 1)
+        System.out.println(tipoProblema);
+        if(tipoProblema == 2)
+            problem = new SnakeProblem(10,500,9,10,tipoProblema);
+        else if(tipoProblema == 3)
+            problem = new SnakeProblem(10,500,9,5,10,tipoProblema);
+        else
             problem = new SnakeProblem(tipoProblema);
     }
 
@@ -210,9 +215,7 @@ public class MainFrame extends JFrame implements GAListener {
                 @Override
                 public Void doInBackground() {
                     try {
-
                         bestInRun = ga.run(problem);
-
                     } catch (Exception e) {
                         e.printStackTrace(System.err);
                     }

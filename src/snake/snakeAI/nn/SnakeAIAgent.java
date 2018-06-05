@@ -1,9 +1,6 @@
 package snake.snakeAI.nn;
 
 import snake.*;
-import snake.snakeAI.ga.Individual;
-import snake.snakeAI.ga.RealVectorIndividual;
-import snake.snakeAI.ga.geneticOperators.MutationFourChoices;
 
 import java.awt.Color;
 
@@ -59,7 +56,6 @@ public class SnakeAIAgent extends SnakeAgent {
      * 
      * @param weights vector of weights comming from the individual.
      */
-
     public void setWeights(double[] weights) {
         // TODO: recebe o genoma e divide em w1 e w2
         int k = 0;
@@ -75,7 +71,8 @@ public class SnakeAIAgent extends SnakeAgent {
                 w2[i][j] = weights[k];
                 k++;
             }
-        } }
+        }
+    }
     
     /**
      * Computes the output of the network for the inputs saved in the class
@@ -121,7 +118,6 @@ public class SnakeAIAgent extends SnakeAgent {
         //preencher os inputs;
         preencherInputs(perception);
         forwardPropagation();
-
         if(output[0]==1)
             return Action.WEST;
         if(output[1]==1)
@@ -138,61 +134,76 @@ public class SnakeAIAgent extends SnakeAgent {
         Cell n = perception.getN();
         Cell e = perception.getE();
         Cell s = perception.getS();
+        switch(this.inputLayerSize) {
+            //não sabe onde está a comida
+            case 5:
+                //Pode ir para NORTE
+                if (n != null && !n.hasTail() && !n.hasAgent()) {
+                    inputs[0] = 1;
+                } else
+                    inputs[0] = 0;
 
-        //Pode ir para NORTE
-        if (n != null && !n.hasTail() && !n.hasAgent()) {
-            inputs[0] = 1;
-        }
-        else
-            inputs[0] = 0;
-        //Pode ir para ESTE
-        if (e != null && !e.hasTail() && !e.hasAgent()) {
-            inputs[1] = 1;
-        }
-        else
-            inputs[1] = 0;
+                //Pode ir para ESTE
+                if (e != null && !e.hasTail() && !e.hasAgent()) {
+                    inputs[1] = 1;
+                }else
+                    inputs[1] = 0;
 
-        //Pode ir para SUL
-        if (s != null && !s.hasTail() && !s.hasAgent()) {
-            inputs[2] = 1;
+                //Pode ir para SUL
+                if (s != null && !s.hasTail() && !s.hasAgent()) {
+                    inputs[2] = 1;
+                }else
+                    inputs[2] = 0;
+                //Pode ir para OESTE
+                if (w != null && !w.hasTail() && !w.hasAgent()) {
+                    inputs[3] = 1;
+                }else
+                    inputs[3] = 0;
+                break;
+            //sabe posiçao da comida
+            case 9:
+                //Pode ir para NORTE
+                if (n != null && !n.hasTail() && !n.hasAgent()) {
+                    inputs[0] = 1;
+                }else
+                    inputs[0] = 0;
+                //Pode ir para ESTE
+                if (e != null && !e.hasTail() && !e.hasAgent()) {
+                    inputs[1] = 1;
+                }else
+                    inputs[1] = 0;
+                //Pode ir para SUL
+                if (s != null && !s.hasTail() && !s.hasAgent()) {
+                    inputs[2] = 1;
+                }else
+                    inputs[2] = 0;
+                //Pode ir para OESTE
+                if (w != null && !w.hasTail() && !w.hasAgent()) {
+                    inputs[3] = 1;
+                }else
+                    inputs[3] = 0;
+                //Posição da comida: acima?
+                if (environment.getFood().getCell().getLine() > getCell().getLine()) {
+                    inputs[4] = 1;
+                }else
+                    inputs[4] = 0;
+                //Posição da comida: à direita?
+                if (environment.getFood().getCell().getColumn() > getCell().getColumn()) {
+                    inputs[5] = 1;
+                }else
+                    inputs[5] = 0;
+                //Posição da comida: abaixo?
+                if (environment.getFood().getCell().getLine() < getCell().getLine()) {
+                    inputs[6] = 1;
+                }else
+                    inputs[6] = 0;
+                //Posição da comida: à esquerda?
+                if (environment.getFood().getCell().getColumn() < getCell().getColumn()) {
+                    inputs[7] = 1;
+                }else
+                    inputs[7] = 0;
+                break;
         }
-        else
-            inputs[2] = 0;
-
-        //Pode ir para OESTE
-        if (w != null && !w.hasTail() && !w.hasAgent()) {
-            inputs[3] = 1;
-        }
-        else
-            inputs[3] = 0;
-
-        //Posição da comida: acima?
-        if (environment.getFood().getCell().getLine() > getCell().getLine()) {
-            inputs[4] = 1;
-        }
-        else
-            inputs[4] = 0;
-
-        //Posição da comida: à direita?
-        if (environment.getFood().getCell().getColumn() > getCell().getColumn()) {
-            inputs[5] = 1;
-        }
-        else
-            inputs[5] = 0;
-
-        //Posição da comida: abaixo?
-        if (environment.getFood().getCell().getLine() < getCell().getLine()) {
-            inputs[6] = 1;
-        }
-        else
-            inputs[6] = 0;
-
-        //Posição da comida: à esquerda?
-        if (environment.getFood().getCell().getColumn() < getCell().getColumn()) {
-            inputs[7] = 1;
-        }
-        else
-            inputs[7] = 0;
 
     }
 }

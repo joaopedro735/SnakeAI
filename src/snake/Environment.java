@@ -11,6 +11,9 @@ import java.util.Random;
 
 public class Environment {
 
+
+    private int size1;
+    private int size2;
     public Random random;
     private final Cell[][] grid;
     private final List<SnakeAgent> agents;
@@ -20,7 +23,9 @@ public class Environment {
     private final int maxIterations;
     private int tipoProblema;
     private int numInputs;
+    private int numInputs2;
     private int numHiddenUnits;
+    private int numHiddenUnits2;
     private int numOutputs;
 
     public Environment(
@@ -54,6 +59,27 @@ public class Environment {
         this.numInputs = numInputs;
         this.numHiddenUnits = numHiddenUnits;
         this.numOutputs = numOutputs;
+    }
+
+    public Environment(int size,
+                       int maxIterations,
+                       int tipoProblema,
+                       int numInputs,
+                       int numInputs2,
+                       int numHiddenUnits,
+                       int numHiddenUnits2,
+                       int size1,int size2,
+                       int numOutputs) {
+        this(size,maxIterations,tipoProblema);
+        this.numInputs = numInputs;
+        //segunda cobra
+        this.numInputs2 = numInputs2;
+        this.numHiddenUnits = numHiddenUnits;
+        //segunda cobra
+        this.numHiddenUnits2 = numHiddenUnits2;
+        this.numOutputs = numOutputs;
+        this.size1 = size1;
+        this.size2 = size2;
     }
 
     public void initialize(int seed) {
@@ -91,6 +117,12 @@ public class Environment {
                 agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
                         numInputs, numHiddenUnits,numOutputs,this));
                 break;
+            case 3:
+                agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        numInputs, numHiddenUnits,numOutputs,this));
+                agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        numInputs2, numHiddenUnits2,numOutputs,this));
+                break;
         }
     }
 
@@ -110,7 +142,7 @@ public class Environment {
     }
 
     public void simulate() {
-
+        // TODO
         foods=0;
         int i;
         for ( i = 0; i < maxIterations && !agents.get(0).isDead(); i++) {
@@ -208,7 +240,19 @@ public class Environment {
 
     public void setWeights(double[] genome) {
         //TODO para cada agente setWeights
-        ((SnakeAIAgent)agents.get(0)).setWeights(genome);
+        double[] gen1 = new double[size1];
+        for (int i = 0; i < size1; i++) {
+            gen1[i] = genome[i];
+        }
+        for (int i = size1; i < size2; i++) {
+            gen1[i] = genome[i];
+        }
+        if(agents.size() > 1) {
+            ((SnakeAIAgent) agents.get(0)).setWeights(genome);
+            ((SnakeAIAgent) agents.get(1)).setWeights(genome);
+        }else{
+            ((SnakeAIAgent) agents.get(0)).setWeights(genome);
+        }
     }
 
     public List<SnakeAgent> getSnakes() {
@@ -230,5 +274,13 @@ public class Environment {
 
     public void setMovements(int value) {
         movements = value;
+    }
+
+    public int getSize1() {
+        return size1;
+    }
+
+    public int getSize2() {
+        return size2;
     }
 }

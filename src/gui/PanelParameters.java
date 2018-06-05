@@ -37,7 +37,7 @@ public class PanelParameters extends PanelAtributesValue {
     JTextField textFieldProbRecombination = new JTextField(PROB_RECOMBINATION, TEXT_FIELD_LENGHT);
     JTextField textFieldProbMutation = new JTextField(PROB_MUTATION, TEXT_FIELD_LENGHT);
     //TODO - MORE PARAMETERS?
-    String[] snakeAgents = {"Ad-Hoc Snake", "Random Snake", "AI Snake"};
+    String[] snakeAgents = {"Ad-Hoc Snake", "Random Snake", "AI Snake","2 Different AI Snakes"};
     JComboBox comboBoxSnakeAgents = new JComboBox(snakeAgents);
 
     private MainFrame mainFrame;
@@ -87,9 +87,8 @@ public class PanelParameters extends PanelAtributesValue {
     }
 
     public void actionPerformedSelectionAgent(ActionEvent e) {
-
-        mainFrame.criarProblema();
-
+        //if(comboBoxSnakeAgents.getSelectedIndex() < 2)
+            mainFrame.criarProblema();
     }
 
     public SelectionMethod<SnakeIndividual, SnakeProblem> getSelectionMethod() {
@@ -124,7 +123,7 @@ public class PanelParameters extends PanelAtributesValue {
     public Mutation<SnakeIndividual> getMutationMethod() {
         double mutationProbability = Double.parseDouble(textFieldProbMutation.getText());
         //TODO
-        return new MutationFourChoices<>(mutationProbability/*TODO?*/);
+        return new MutationUniform<>(mutationProbability);
     }
 }
 
