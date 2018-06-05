@@ -53,8 +53,10 @@ public class SnakeExperimentsFactory extends ExperimentsFactory {
                 break;
             case "uniform":
                 recombination = new RecombinationUniform<>(recombinationProbability);
+                break;
             case "four_choices":
                 recombination = new RecombinationUniform<>(recombinationProbability);
+                break;
         }
 
         // TODO YOU MAY ADD NEW PARAMETERS (eg., NEW GENETIC OPERATORS, ...).
