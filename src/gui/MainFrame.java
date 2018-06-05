@@ -44,17 +44,16 @@ public class MainFrame extends JFrame implements GAListener {
     private int tipoProblema;
     private PanelSimulation simulationPanel;
 
-    public int getTipoProblema() {
-        return tipoProblema;
-    }
-
-
     public MainFrame() {
         try {
             jbInit();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
+    }
+
+    public int getTipoProblema() {
+        return tipoProblema;
     }
 
     public void criarProblema() {

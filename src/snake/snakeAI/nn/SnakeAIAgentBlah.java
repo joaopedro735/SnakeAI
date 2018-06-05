@@ -1,14 +1,11 @@
 package snake.snakeAI.nn;
 
 import snake.*;
-import snake.snakeAI.ga.Individual;
-import snake.snakeAI.ga.RealVectorIndividual;
-import snake.snakeAI.ga.geneticOperators.MutationFourChoices;
 
-import java.awt.Color;
+import java.awt.*;
 
-public class SnakeAIAgent extends SnakeAgent {
-   
+public class SnakeAIAgentBlah extends SnakeAgent {
+
     final private int inputLayerSize;
     final private int hiddenLayerSize;
     final private int outputLayerSize;
@@ -34,13 +31,14 @@ public class SnakeAIAgent extends SnakeAgent {
      */
     final private int[] output;
 
-    public SnakeAIAgent(
+    public SnakeAIAgentBlah(
             Cell cell,
             int inputLayerSize,
             int hiddenLayerSize,
             int outputLayerSize,
-            Environment environment, Color color) {
-        super(cell, color, environment);
+            Environment environment) {
+        super(cell, Color.BLUE,environment);
+        hiddenLayerSize += 5;
         this.inputLayerSize = inputLayerSize;
         this.hiddenLayerSize = hiddenLayerSize;
         this.outputLayerSize = outputLayerSize;
@@ -165,34 +163,5 @@ public class SnakeAIAgent extends SnakeAgent {
         }
         else
             inputs[3] = 0;
-
-        //Posição da comida: acima?
-        if (environment.getFood().getCell().getLine() > getCell().getLine()) {
-            inputs[4] = 1;
-        }
-        else
-            inputs[4] = 0;
-
-        //Posição da comida: à direita?
-        if (environment.getFood().getCell().getColumn() > getCell().getColumn()) {
-            inputs[5] = 1;
-        }
-        else
-            inputs[5] = 0;
-
-        //Posição da comida: abaixo?
-        if (environment.getFood().getCell().getLine() < getCell().getLine()) {
-            inputs[6] = 1;
-        }
-        else
-            inputs[6] = 0;
-
-        //Posição da comida: à esquerda?
-        if (environment.getFood().getCell().getColumn() < getCell().getColumn()) {
-            inputs[7] = 1;
-        }
-        else
-            inputs[7] = 0;
-
     }
 }

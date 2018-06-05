@@ -23,7 +23,6 @@ public abstract class SnakeAgent {
         this.color = color;
         this.environment = environment;
         this.tailList = new ArrayList<>();
-        environment.stop = false;
     }
 
     public void act() {
@@ -93,7 +92,6 @@ public abstract class SnakeAgent {
         else{
             isDead = true;
             environment.stop = true;
-
         }
     }
 
