@@ -246,7 +246,4 @@ public class Environment {
         movements = value;
     }
 
-    public void setNumSnakesAI(int numSnakesAI) {
-        this.numSnakesAI = numSnakesAI;
-    }
 }
