@@ -4,10 +4,10 @@ import snake.snakeAI.ga.GeneticAlgorithm;
 import snake.snakeAI.ga.RealVectorIndividual;
 
 //PLEASE, MODIFY THE CLASS NAME
-public class MutationUniform<I extends RealVectorIndividual> extends Mutation<I> {
+public class MutationFourChoices<I extends RealVectorIndividual> extends Mutation<I> {
 
    
-    public MutationUniform(double probability /*TODO?*/) {
+    public MutationFourChoices(double probability /*TODO?*/) {
         super(probability);
         // TODO
     }
@@ -24,6 +24,6 @@ public class MutationUniform<I extends RealVectorIndividual> extends Mutation<I>
     
     @Override
     public String toString(){
-        return "Uniform distribution mutation (" + probability /* + ")" + TODO?*/;
+        return "Uniform distribution mutation (" + probability /* + TODO?*/ + ")";
     }
 }

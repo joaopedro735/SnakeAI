@@ -11,7 +11,6 @@ import java.util.Random;
 
 public class Environment {
 
-
     private int size1;
     private int size2;
     public Random random;
@@ -27,6 +26,8 @@ public class Environment {
     private int numHiddenUnits;
     private int numHiddenUnits2;
     private int numOutputs;
+    private int numSnakesAI = 1;
+    public boolean stop;
 
     public Environment(
             int size,
@@ -59,27 +60,9 @@ public class Environment {
         this.numInputs = numInputs;
         this.numHiddenUnits = numHiddenUnits;
         this.numOutputs = numOutputs;
-    }
-
-    public Environment(int size,
-                       int maxIterations,
-                       int tipoProblema,
-                       int numInputs,
-                       int numInputs2,
-                       int numHiddenUnits,
-                       int numHiddenUnits2,
-                       int size1,int size2,
-                       int numOutputs) {
-        this(size,maxIterations,tipoProblema);
-        this.numInputs = numInputs;
-        //segunda cobra
-        this.numInputs2 = numInputs2;
-        this.numHiddenUnits = numHiddenUnits;
-        //segunda cobra
-        this.numHiddenUnits2 = numHiddenUnits2;
-        this.numOutputs = numOutputs;
-        this.size1 = size1;
-        this.size2 = size2;
+        if (maxIterations == 300) {
+            numSnakesAI = 2;
+        }
     }
 
     public void initialize(int seed) {
@@ -91,10 +74,10 @@ public class Environment {
     // TODO MODIFY TO PLACE ADHOC OR AI SNAKE AGENTS
     private void placeAgents() {
         //Limpar agentes e caudas
-        if(agents.size() > 0) {
-                for (SnakeAgent agent: agents) {
+        if (agents.size() > 0) {
+            for (SnakeAgent agent : agents) {
                 agent.getCell().setAgent(null);
-                for (Tail tail: agent.getTailList()) {
+                for (Tail tail : agent.getTailList()) {
                     tail.getCell().setTail(null);
                 }
                 agent.getTailList().clear();
@@ -103,7 +86,7 @@ public class Environment {
 
         agents.clear();
         //Criar agentes
-        switch(this.tipoProblema){
+        switch (this.tipoProblema) {
             case 0:
                 agents.add(new SnakeAdhocAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
                         Color.BLACK,
@@ -115,13 +98,10 @@ public class Environment {
                 break;
             case 2:
                 agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
-                        numInputs, numHiddenUnits,numOutputs,this));
-                break;
-            case 3:
-                agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
-                        numInputs, numHiddenUnits,numOutputs,this));
-                agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
-                        numInputs2, numHiddenUnits2,numOutputs,this));
+                        numInputs, numHiddenUnits, numOutputs, this, Color.blue));
+                if (numSnakesAI == 2)
+                    agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                            numInputs, numHiddenUnits, numOutputs, this, Color.magenta));
                 break;
         }
     }
@@ -129,41 +109,37 @@ public class Environment {
     protected void placeFood() {
         // TODO
         //Limpar comida
-        if(food != null){
+        if (food != null) {
             food.getCell().setFood(null);
         }
         food = null;
         //Criar comida
         Cell cell;
-        do{
-            cell = getCell(random.nextInt(getNumLines()),random.nextInt(getNumColumns()));
-        }while(cell.hasAgent() || cell.hasTail());
+        do {
+            cell = getCell(random.nextInt(getNumLines()), random.nextInt(getNumColumns()));
+        } while (cell.hasAgent() || cell.hasTail());
         food = new Food(cell);
     }
 
     public void simulate() {
-        // TODO
         foods=0;
         int i;
-        for ( i = 0; i < maxIterations && !agents.get(0).isDead(); i++) {
+        stop = false;
+        for (i = 0; i < maxIterations && !stop; i++) {
             for (SnakeAgent agent : agents) {
                 agent.act();
                 fireUpdatedEnvironment();
             }
         }
         setMovements(i);
-        setFoods(agents.get(0).getFoods());
+        setFoods();
     }
-
-
-
-
 
     public int getSize() {
         return grid.length;
     }
 
-        public Cell getNorthCell(Cell cell) {
+    public Cell getNorthCell(Cell cell) {
         if (cell.getLine() > 0) {
             return grid[cell.getLine() - 1][cell.getColumn()];
         }
@@ -240,18 +216,9 @@ public class Environment {
 
     public void setWeights(double[] genome) {
         //TODO para cada agente setWeights
-        double[] gen1 = new double[size1];
-        for (int i = 0; i < size1; i++) {
-            gen1[i] = genome[i];
-        }
-        for (int i = size1; i < size2; i++) {
-            gen1[i] = genome[i];
-        }
-        if(agents.size() > 1) {
-            ((SnakeAIAgent) agents.get(0)).setWeights(genome);
-            ((SnakeAIAgent) agents.get(1)).setWeights(genome);
-        }else{
-            ((SnakeAIAgent) agents.get(0)).setWeights(genome);
+        //((SnakeAIAgent)agents.get(0)).setWeights(genome);
+        for (SnakeAgent agent :agents) {
+            ((SnakeAIAgent) agent).setWeights(genome);
         }
     }
 
@@ -264,8 +231,13 @@ public class Environment {
         return foods;
     }
 
-    public void setFoods(int value) {
-        foods = value;
+    public void setFoods() {
+        int sum = 0;
+        for (SnakeAgent agent :
+                agents) {
+            sum += agent.getFoods();
+        }
+        foods = sum;
     }
 
     public int getMovements() {
@@ -274,13 +246,5 @@ public class Environment {
 
     public void setMovements(int value) {
         movements = value;
-    }
-
-    public int getSize1() {
-        return size1;
-    }
-
-    public int getSize2() {
-        return size2;
     }
 }
