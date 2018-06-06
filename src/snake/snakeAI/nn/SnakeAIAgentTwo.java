@@ -51,5 +51,41 @@ public class SnakeAIAgentTwo extends SnakeAIAgent {
         }
         else
             inputs[3] = 0;
+
+
+        //Food norte
+        if (n != null && n.hasFood())
+            inputs[4] = 1;
+        else
+            inputs[4] = 0;
+
+        //Food este
+        if (e != null && e.hasFood())
+            inputs[5] = 1;
+        else
+            inputs[5] = 0;
+
+        //Food sul
+        if (s != null && s.hasFood())
+            inputs[6] = 1;
+        else
+            inputs[6] = 0;
+
+        //Food oeste
+        if (w != null && w.hasFood())
+            inputs[7] = 1;
+        else
+            inputs[7] = 0;
+
+        if ((environment.getFood().getCell().getColumn() == getCell().getColumn()))
+            inputs[8] = 1;
+        else
+            inputs[8] = 0;
+
+        if ((environment.getFood().getCell().getLine() == getCell().getLine()))
+            inputs[9] = 1;
+        else
+            inputs[9] = 0;
+
     }
 }
