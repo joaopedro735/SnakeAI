@@ -1,44 +1,46 @@
 package snake.snakeAI.nn;
 
 import snake.*;
+import snake.snakeAI.ga.Individual;
+import snake.snakeAI.ga.RealVectorIndividual;
+import snake.snakeAI.ga.geneticOperators.MutationFourChoices;
 
-import java.awt.*;
+import java.awt.Color;
 
-public class SnakeAIAgentBlah extends SnakeAgent {
-
-    final private int inputLayerSize;
-    final private int hiddenLayerSize;
-    final private int outputLayerSize;
+public class SnakeAIAgent extends SnakeAgent {
+   
+    final protected int inputLayerSize;
+    final protected int hiddenLayerSize;
+    final protected int outputLayerSize;
 
     /**
      * Network inputs array.
      */
-    final private int[] inputs;
+    final protected int[] inputs;
     /**
      * Hiddden layer weights.
      */
-    final private double[][] w1;
+    final protected double[][] w1;
     /**
      * Output layer weights.
      */
-    final private double[][] w2;
+    final protected double[][] w2;
     /**
      * Hidden layer activation values.
      */
-    final private double[] hiddenLayerOutput;
+    final protected double[] hiddenLayerOutput;
     /**
      * Output layer activation values.
      */
-    final private int[] output;
+    final protected int[] output;
 
-    public SnakeAIAgentBlah(
+    public SnakeAIAgent(
             Cell cell,
             int inputLayerSize,
             int hiddenLayerSize,
             int outputLayerSize,
-            Environment environment) {
-        super(cell, Color.BLUE,environment);
-        hiddenLayerSize += 5;
+            Environment environment, Color color) {
+        super(cell, color, environment);
         this.inputLayerSize = inputLayerSize;
         this.hiddenLayerSize = hiddenLayerSize;
         this.outputLayerSize = outputLayerSize;
@@ -80,7 +82,7 @@ public class SnakeAIAgentBlah extends SnakeAgent {
      * vector "inputs".
      *
      */
-    private void forwardPropagation() {
+    protected void forwardPropagation() {
         // TODO
         for (int i = 0; i < hiddenLayerSize; i++) { // percorre os neurónios da camda
             double somapesada = 0;
@@ -131,7 +133,7 @@ public class SnakeAIAgentBlah extends SnakeAgent {
         return null;
     }
 
-    private void preencherInputs(Perception perception) {
+    protected void preencherInputs(Perception perception) {
         Cell w = perception.getW();
         Cell n = perception.getN();
         Cell e = perception.getE();
@@ -163,5 +165,34 @@ public class SnakeAIAgentBlah extends SnakeAgent {
         }
         else
             inputs[3] = 0;
+
+        //Posição da comida: acima?
+        if (environment.getFood().getCell().getLine() > getCell().getLine()) {
+            inputs[4] = 1;
+        }
+        else
+            inputs[4] = 0;
+
+        //Posição da comida: à direita?
+        if (environment.getFood().getCell().getColumn() > getCell().getColumn()) {
+            inputs[5] = 1;
+        }
+        else
+            inputs[5] = 0;
+
+        //Posição da comida: abaixo?
+        if (environment.getFood().getCell().getLine() < getCell().getLine()) {
+            inputs[6] = 1;
+        }
+        else
+            inputs[6] = 0;
+
+        //Posição da comida: à esquerda?
+        if (environment.getFood().getCell().getColumn() < getCell().getColumn()) {
+            inputs[7] = 1;
+        }
+        else
+            inputs[7] = 0;
+
     }
 }
