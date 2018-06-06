@@ -4,9 +4,9 @@ import snake.*;
 
 import java.awt.*;
 
-public class SnakeAIAgentBlah extends SnakeAIAgent {
+public class SnakeAIAgentTwo extends SnakeAIAgent {
 
-    public SnakeAIAgentBlah(
+    public SnakeAIAgentTwo(
             Cell cell,
             int inputLayerSize,
             int hiddenLayerSize,

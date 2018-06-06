@@ -94,7 +94,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
                 maxIterations,
                 numHiddenUnits,
                 numEnvironmentRuns,
-                2);
+                3);
     }
 
     // MODIFY IF YOU DEFINE OTHER PARAMETERS

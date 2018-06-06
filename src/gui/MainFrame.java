@@ -25,7 +25,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class MainFrame extends JFrame implements GAListener {
 
     private static final long serialVersionUID = 1L;
-    private SnakeProblem problem= new SnakeProblem(0);
+    private SnakeProblem problem = new SnakeProblem(0);
     private GeneticAlgorithm<SnakeIndividual, SnakeProblem> ga;
     private SnakeIndividual bestInRun;
     private SnakeExperimentsFactory experimentsFactory;

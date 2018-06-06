@@ -1,6 +1,8 @@
 package snake;
 
 import snake.snakeAI.nn.SnakeAIAgent;
+import snake.snakeAI.nn.SnakeAIAgentTwo;
+import snake.snakeAI.nn.SnakeAIAgentOne;
 import snake.snakeAdhoc.SnakeAdhocAgent;
 import snake.snakeRandom.SnakeRandomAgent;
 
@@ -93,12 +95,15 @@ public class Environment {
                         Color.GREEN, this));
                 break;
             case 2:
-                agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                agents.add(new SnakeAIAgentOne(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
                         numInputs, numHiddenUnits, numOutputs, this, Color.blue));
                 if (numSnakesAI == 2)
-                    agents.add(new SnakeAIAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                    agents.add(new SnakeAIAgentOne(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
                             numInputs, numHiddenUnits, numOutputs, this, Color.magenta));
                 break;
+            case 3:
+                agents.add(new SnakeAIAgentTwo(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        numInputs, numHiddenUnits, numOutputs, this, Color.blue));
         }
     }
 
