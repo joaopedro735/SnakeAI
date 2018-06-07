@@ -79,7 +79,7 @@ public class Environment {
         }
 
         agents.clear();
-        //Criar agentes
+        //Criar agentes/
         switch (this.tipoProblema) {
             case 0:
                 agents.add(new SnakeAdhocAgent(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
