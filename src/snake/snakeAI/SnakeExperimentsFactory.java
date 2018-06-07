@@ -27,7 +27,7 @@ public class SnakeExperimentsFactory extends ExperimentsFactory {
     }
 
     @Override
-    public Experiment buildExperiment() throws IOException {
+    public Experiment buildExperiment(int tipoProblema) throws IOException {
         numRuns = Integer.parseInt(getParameterValue("Runs"));
         populationSize = Integer.parseInt(getParameterValue("Population size"));
         maxGenerations = Integer.parseInt(getParameterValue("Max generations"));
@@ -71,7 +71,7 @@ public class SnakeExperimentsFactory extends ExperimentsFactory {
         }
 
         //PROBLEM 
-        problem = SnakeProblem.buildProblemFromFile(new File(getParameterValue("Problem file")));
+        problem = SnakeProblem.buildProblemFromFile(new File(getParameterValue("Problem file")), tipoProblema);
 
         String textualRepresentation = buildTextualExperiment();
 
