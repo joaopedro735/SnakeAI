@@ -13,7 +13,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
     private static final int NUM_NN_INPUTS = 9; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
     private static final int NUM_NN_OUTPUTS = 4; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
     //segunda cobra
-    private static final int NUM_NN_INPUTS2 = 5; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
+    private static final int NUM_NN_INPUTS2 = 9; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
     private  int GENOME_SIZE; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
 
     final private int environmentSize;
@@ -23,7 +23,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
     private int numInputs2;
     private int numHiddenUnits;
     //segunda cobra
-    private int numHiddenUnits2;
+    //private int numHiddenUnits2;
     public int numOutputs;
     private int numEnvironmentRuns;
     private int tipoProblema;
@@ -42,6 +42,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
         this.numOutputs = NUM_NN_OUTPUTS;
         this.numEnvironmentRuns = numEnvironmentRuns;
         this.tipoProblema = tipoProblema;
+        this.numInputs2 = NUM_NN_INPUTS2;
         if(tipoProblema == 2 || tipoProblema == 4){
             numInputs = NUM_NN_INPUTS;
             GENOME_SIZE=numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs;

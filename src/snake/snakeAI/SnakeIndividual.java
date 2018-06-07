@@ -43,7 +43,7 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
         }
 
             //penalty
-            fitness = foods * 1000 + movements - (penalty * 200);
+            fitness = foods * 1000 + movements - (penalty * 275);
         }
         return fitness;
     }

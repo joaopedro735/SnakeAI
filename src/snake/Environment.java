@@ -272,8 +272,10 @@ public class Environment {
 
             sum += agent.getFoods();
         }
-        foods1 = agents.get(0).getFoods();
-        foods2 = agents.get(1).getFoods();
+        if(agents.size() > 1) {
+            foods1 = agents.get(0).getFoods();
+            foods2 = agents.get(1).getFoods();
+        }
         foods = sum;
 
     }
