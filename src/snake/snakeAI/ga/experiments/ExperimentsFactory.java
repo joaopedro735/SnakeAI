@@ -25,7 +25,7 @@ public abstract class ExperimentsFactory {
         readStatisticsFile(configFile);
     }
 
-    protected abstract Experiment buildExperiment(int tipoProblema) throws IOException;
+    protected abstract Experiment buildExperiment() throws IOException;
 
     public abstract GeneticAlgorithm generateGAInstance(int seed);
 
@@ -33,9 +33,9 @@ public abstract class ExperimentsFactory {
         return orderedParametersVector[0].activeValueIndex < orderedParametersVector[0].getNumberOfValues();
     }
 
-    public Experiment nextExperiment(int tipoProblema) throws IOException {
+    public Experiment nextExperiment() throws IOException {
         if (hasMoreExperiments()) {
-            Experiment experiment = buildExperiment(tipoProblema);
+            Experiment experiment = buildExperiment();
             indicesManaging(orderedParametersVector.length - 1);
             return experiment;
         }

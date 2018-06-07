@@ -91,7 +91,6 @@ public abstract class SnakeAgent {
         }
         else{
             isDead = true;
-            environment.stop = true;
         }
     }
 
