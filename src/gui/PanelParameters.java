@@ -24,7 +24,7 @@ public class PanelParameters extends PanelAtributesValue {
     public static final String GENERATIONS = "1000";
     public static final String TOURNAMENT_SIZE = "4";
     public static final String PROB_RECOMBINATION = "0.7";
-    public static final String PROB_MUTATION = "0.7";
+    public static final String PROB_MUTATION = "0.01";
 
     JTextField textFieldSeed = new JTextField(SEED, TEXT_FIELD_LENGHT);
     JTextField textFieldN = new JTextField(POPULATION_SIZE, TEXT_FIELD_LENGHT);
@@ -37,7 +37,7 @@ public class PanelParameters extends PanelAtributesValue {
     JTextField textFieldProbRecombination = new JTextField(PROB_RECOMBINATION, TEXT_FIELD_LENGHT);
     JTextField textFieldProbMutation = new JTextField(PROB_MUTATION, TEXT_FIELD_LENGHT);
     //TODO - MORE PARAMETERS?
-    String[] snakeAgents = {"Ad-Hoc Snake", "Random Snake", "AI Snake"};
+    String[] snakeAgents = {"Ad-Hoc Snake", "Random Snake", "AI Snake", "AI Snake 2", "AI Snake Homogeneous", "AI Snake Heterogeneous"};
     JComboBox comboBoxSnakeAgents = new JComboBox(snakeAgents);
 
     private MainFrame mainFrame;
@@ -87,7 +87,6 @@ public class PanelParameters extends PanelAtributesValue {
     }
 
     public void actionPerformedSelectionAgent(ActionEvent e) {
-
         mainFrame.criarProblema();
 
     }
