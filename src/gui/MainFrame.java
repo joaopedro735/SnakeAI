@@ -42,6 +42,7 @@ public class MainFrame extends JFrame implements GAListener {
     private XYSeries seriesAverage;
     private SwingWorker<Void, Void> worker;
     private int tipoProblema;
+    private int nadalol;
     private PanelSimulation simulationPanel;
 
     public MainFrame() {
@@ -59,11 +60,7 @@ public class MainFrame extends JFrame implements GAListener {
     public void criarProblema() {
         tipoProblema = panelParameters.comboBoxSnakeAgents.getSelectedIndex();
         System.out.println(tipoProblema);
-        if(tipoProblema == 2)
-            problem = new SnakeProblem(10,500,9,10,tipoProblema);
-        else if(tipoProblema == 3)
-            problem = new SnakeProblem(10,500,9,5,10,tipoProblema);
-        else
+        if(tipoProblema <= 1)
             problem = new SnakeProblem(tipoProblema);
     }
 
@@ -214,7 +211,9 @@ public class MainFrame extends JFrame implements GAListener {
                 @Override
                 public Void doInBackground() {
                     try {
+
                         bestInRun = ga.run(problem);
+
                     } catch (Exception e) {
                         e.printStackTrace(System.err);
                     }

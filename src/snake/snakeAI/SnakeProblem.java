@@ -38,18 +38,29 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
         System.out.println("Construtor AI");
         this.environmentSize = environmentSize;
         this.maxIterations = maxIterations;
-        this.numInputs = NUM_NN_INPUTS;
         this.numHiddenUnits = numHiddenUnits;
         this.numOutputs = NUM_NN_OUTPUTS;
         this.numEnvironmentRuns = numEnvironmentRuns;
         this.tipoProblema = tipoProblema;
-        GENOME_SIZE=numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
+        if(tipoProblema == 2 || tipoProblema == 4){
+            numInputs = NUM_NN_INPUTS;
+            GENOME_SIZE=numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
+        }else if(tipoProblema == 5){
+            numInputs = NUM_NN_INPUTS;
+            numInputs2 = NUM_NN_INPUTS2;
+            GENOME_SIZE=numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs +
+                    numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
+        }else if(tipoProblema == 3){
+            //tipoProblema = 3
+            numInputs = NUM_NN_INPUTS2;
+            GENOME_SIZE=numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
+        }
 
         environment = new Environment(environmentSize,
-                maxIterations,tipoProblema,numInputs,numHiddenUnits,numOutputs);
+                maxIterations,tipoProblema,numInputs,numHiddenUnits,numOutputs,GENOME_SIZE);
     }
 
-    //segunda cobra
+    /*//segunda cobra
     public SnakeProblem(
             int environmentSize,
             int maxIterations,
@@ -73,7 +84,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
 
         environment = new Environment(environmentSize,
                 maxIterations,tipoProblema,numInputs,numInputs2,numHiddenUnits,numHiddenUnits2,numOutputs, numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs,numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs);
-    }
+    }*/
 
     public SnakeProblem(int tipoProblema) {
         this.maxIterations = 500;

@@ -3,7 +3,6 @@ package snake.snakeAI.nn;
 import snake.*;
 import snake.snakeAI.ga.Individual;
 import snake.snakeAI.ga.RealVectorIndividual;
-import snake.snakeAI.ga.geneticOperators.MutationFourChoices;
 
 import java.awt.Color;
 

@@ -14,7 +14,6 @@ import java.util.Random;
 public class Environment {
 
     private int size1;
-    private int size2;
     public Random random;
     private final Cell[][] grid;
     private final List<SnakeAgent> agents;
@@ -29,6 +28,17 @@ public class Environment {
     private int numHiddenUnits2;
     private int numOutputs;
     public boolean stop;
+
+    public int getFoods1() {
+        return foods1;
+    }
+
+    public int getFoods2() {
+        return foods2;
+    }
+
+    private int foods1;
+    private int foods2;
 
     public Environment(
             int size,
@@ -55,12 +65,14 @@ public class Environment {
             int tipoProblema,
             int numInputs,
             int numHiddenUnits,
-            int numOutputs) {
+            int numOutputs,
+            int size1) {
 
         this(size,maxIterations,tipoProblema);
         this.numInputs = numInputs;
         this.numHiddenUnits = numHiddenUnits;
         this.numOutputs = numOutputs;
+        this.size1 = size1;
     }
 
     public void initialize(int seed) {
@@ -227,10 +239,21 @@ public class Environment {
 
     public void setWeights(double[] genome) {
         //TODO para cada agente setWeights
-        //((SnakeAIAgent)agents.get(0)).setWeights(genome);
-        for (SnakeAgent agent :agents) {
-            ((SnakeAIAgent) agent).setWeights(genome);
+        if(tipoProblema != 5) {
+            for (SnakeAgent agent : agents) {
+                ((SnakeAIAgent) agent).setWeights(genome);
+            }
+        }else{
+            //Duas diferentes
+            double[] genome1 = new double[numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs];
+            System.arraycopy(genome,0,genome1,0,numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs);
+            double[] genome2 = new double[size1-(numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs)];
+            System.arraycopy(genome,0,genome2,0,size1-(numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs));
+            ((SnakeAIAgent) agents.get(0)).setWeights(genome1);
+            ((SnakeAIAgent) agents.get(1)).setWeights(genome2);
         }
+
+
     }
 
     public List<SnakeAgent> getSnakes() {
@@ -246,9 +269,13 @@ public class Environment {
         int sum = 0;
         for (SnakeAgent agent :
                 agents) {
+
             sum += agent.getFoods();
         }
+        foods1 = agents.get(0).getFoods();
+        foods2 = agents.get(1).getFoods();
         foods = sum;
+
     }
 
     public int getMovements() {
