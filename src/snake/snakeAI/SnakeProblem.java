@@ -67,7 +67,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
     }
 
     // MODIFY IF YOU DEFINE OTHER PARAMETERS
-    public static SnakeProblem buildProblemFromFile(File file) throws IOException {
+    public static SnakeProblem buildProblemFromFile(File file, int tipoProblema) throws IOException {
         java.util.Scanner f = new java.util.Scanner(file);
 
         List<String> lines = new LinkedList<>();
@@ -84,7 +84,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
             String[] tokens = line.split(":");
             parametersValues.add(tokens[1].trim());
         }
-
+        System.out.println("Problem:" + tipoProblema);
         int environmentSize = Integer.parseInt(parametersValues.get(0));
         int maxIterations = Integer.parseInt(parametersValues.get(1));
         int numHiddenUnits = Integer.parseInt(parametersValues.get(2));
@@ -94,7 +94,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
                 maxIterations,
                 numHiddenUnits,
                 numEnvironmentRuns,
-                3);
+                tipoProblema);
     }
 
     // MODIFY IF YOU DEFINE OTHER PARAMETERS

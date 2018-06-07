@@ -76,8 +76,8 @@ public class SnakeAIAgentTwo extends SnakeAIAgent {
             inputs[7] = 1;
         else
             inputs[7] = 0;
-
-        if ((environment.getFood().getCell().getColumn() == getCell().getColumn()))
+        //TODO
+        /*if ((environment.getFood().getCell().getColumn() == getCell().getColumn()))
             inputs[8] = 1;
         else
             inputs[8] = 0;
@@ -85,7 +85,7 @@ public class SnakeAIAgentTwo extends SnakeAIAgent {
         if ((environment.getFood().getCell().getLine() == getCell().getLine()))
             inputs[9] = 1;
         else
-            inputs[9] = 0;
+            inputs[9] = 0;*/
 
     }
 }

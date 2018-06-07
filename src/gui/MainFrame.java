@@ -167,7 +167,7 @@ public class MainFrame extends JFrame implements GAListener {
         try {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File dataSet = fc.getSelectedFile();
-                problem = SnakeProblem.buildProblemFromFile(dataSet);
+                problem = SnakeProblem.buildProblemFromFile(dataSet, tipoProblema);
                 problemPanel.textArea.setText(problem.toString());
                 problemPanel.textArea.setCaretPosition(0);
                 buttonRun.setEnabled(true);
@@ -278,7 +278,7 @@ public class MainFrame extends JFrame implements GAListener {
                     while (experimentsFactory.hasMoreExperiments()) {
                         try {
 
-                            Experiment experiment = experimentsFactory.nextExperiment();
+                            Experiment experiment = experimentsFactory.nextExperiment(tipoProblema);
                             experiment.run();
 
                         } catch (IOException e1) {

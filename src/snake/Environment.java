@@ -24,7 +24,6 @@ public class Environment {
     private int numInputs;
     private int numHiddenUnits;
     private int numOutputs;
-    private int numSnakesAI = 1;
     public boolean stop;
 
     public Environment(
@@ -58,9 +57,6 @@ public class Environment {
         this.numInputs = numInputs;
         this.numHiddenUnits = numHiddenUnits;
         this.numOutputs = numOutputs;
-        if (maxIterations == 300) {
-            numSnakesAI = 2;
-        }
     }
 
     public void initialize(int seed) {
@@ -97,13 +93,23 @@ public class Environment {
             case 2:
                 agents.add(new SnakeAIAgentOne(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
                         numInputs, numHiddenUnits, numOutputs, this, Color.blue));
-                if (numSnakesAI == 2)
-                    agents.add(new SnakeAIAgentOne(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
-                            numInputs, numHiddenUnits, numOutputs, this, Color.magenta));
                 break;
             case 3:
                 agents.add(new SnakeAIAgentTwo(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
                         numInputs, numHiddenUnits, numOutputs, this, Color.blue));
+                break;
+            case 4:
+                agents.add(new SnakeAIAgentOne(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        numInputs, numHiddenUnits, numOutputs, this, Color.blue));
+                agents.add(new SnakeAIAgentOne(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        numInputs, numHiddenUnits, numOutputs, this, Color.magenta));
+                break;
+            case 5:
+                agents.add(new SnakeAIAgentOne(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        numInputs, numHiddenUnits, numOutputs, this, Color.blue));
+                agents.add(new SnakeAIAgentTwo(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
+                        numInputs, numHiddenUnits, numOutputs, this, Color.magenta));
+                break;
         }
     }
 

@@ -37,7 +37,7 @@ public class PanelParameters extends PanelAtributesValue {
     JTextField textFieldProbRecombination = new JTextField(PROB_RECOMBINATION, TEXT_FIELD_LENGHT);
     JTextField textFieldProbMutation = new JTextField(PROB_MUTATION, TEXT_FIELD_LENGHT);
     //TODO - MORE PARAMETERS?
-    String[] snakeAgents = {"Ad-Hoc Snake", "Random Snake", "AI Snake", "AI Snake 2"};
+    String[] snakeAgents = {"Ad-Hoc Snake", "Random Snake", "AI Snake", "AI Snake 2", "AI Snake Homogeneous", "AI Snake Heterogeneous"};
     JComboBox comboBoxSnakeAgents = new JComboBox(snakeAgents);
 
     private MainFrame mainFrame;
