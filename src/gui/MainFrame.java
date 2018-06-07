@@ -25,7 +25,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class MainFrame extends JFrame implements GAListener {
 
     private static final long serialVersionUID = 1L;
-    private SnakeProblem problem = new SnakeProblem(0);
+    private SnakeProblem problem= new SnakeProblem(0);
     private GeneticAlgorithm<SnakeIndividual, SnakeProblem> ga;
     private SnakeIndividual bestInRun;
     private SnakeExperimentsFactory experimentsFactory;
@@ -44,16 +44,17 @@ public class MainFrame extends JFrame implements GAListener {
     private int tipoProblema;
     private PanelSimulation simulationPanel;
 
+    public int getTipoProblema() {
+        return tipoProblema;
+    }
+
+
     public MainFrame() {
         try {
             jbInit();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
-    }
-
-    public int getTipoProblema() {
-        return tipoProblema;
     }
 
     public void criarProblema() {
@@ -167,7 +168,7 @@ public class MainFrame extends JFrame implements GAListener {
         try {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File dataSet = fc.getSelectedFile();
-                problem = SnakeProblem.buildProblemFromFile(dataSet, tipoProblema);
+                problem = SnakeProblem.buildProblemFromFile(dataSet);
                 problemPanel.textArea.setText(problem.toString());
                 problemPanel.textArea.setCaretPosition(0);
                 buttonRun.setEnabled(true);
@@ -278,7 +279,7 @@ public class MainFrame extends JFrame implements GAListener {
                     while (experimentsFactory.hasMoreExperiments()) {
                         try {
 
-                            Experiment experiment = experimentsFactory.nextExperiment(tipoProblema);
+                            Experiment experiment = experimentsFactory.nextExperiment();
                             experiment.run();
 
                         } catch (IOException e1) {

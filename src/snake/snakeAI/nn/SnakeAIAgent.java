@@ -7,40 +7,40 @@ import snake.snakeAI.ga.geneticOperators.MutationFourChoices;
 
 import java.awt.Color;
 
-public abstract class SnakeAIAgent extends SnakeAgent {
+public class SnakeAIAgent extends SnakeAgent {
    
-    final protected int inputLayerSize;
-    final protected int hiddenLayerSize;
-    final protected int outputLayerSize;
+    final private int inputLayerSize;
+    final private int hiddenLayerSize;
+    final private int outputLayerSize;
 
     /**
      * Network inputs array.
      */
-    final protected int[] inputs;
+    final private int[] inputs;
     /**
      * Hiddden layer weights.
      */
-    final protected double[][] w1;
+    final private double[][] w1;
     /**
      * Output layer weights.
      */
-    final protected double[][] w2;
+    final private double[][] w2;
     /**
      * Hidden layer activation values.
      */
-    final protected double[] hiddenLayerOutput;
+    final private double[] hiddenLayerOutput;
     /**
      * Output layer activation values.
      */
-    final protected int[] output;
+    final private int[] output;
 
     public SnakeAIAgent(
             Cell cell,
             int inputLayerSize,
             int hiddenLayerSize,
             int outputLayerSize,
-            Environment environment, Color color) {
-        super(cell, color, environment);
+            Environment environment) {
+        super(cell, Color.BLUE,environment);
         this.inputLayerSize = inputLayerSize;
         this.hiddenLayerSize = hiddenLayerSize;
         this.outputLayerSize = outputLayerSize;
@@ -82,7 +82,7 @@ public abstract class SnakeAIAgent extends SnakeAgent {
      * vector "inputs".
      *
      */
-    protected void forwardPropagation() {
+    private void forwardPropagation() {
         // TODO
         for (int i = 0; i < hiddenLayerSize; i++) { // percorre os neurónios da camda
             double somapesada = 0;
@@ -133,5 +133,66 @@ public abstract class SnakeAIAgent extends SnakeAgent {
         return null;
     }
 
-    protected abstract void preencherInputs(Perception perception);
+    private void preencherInputs(Perception perception) {
+        Cell w = perception.getW();
+        Cell n = perception.getN();
+        Cell e = perception.getE();
+        Cell s = perception.getS();
+
+        //Pode ir para NORTE
+        if (n != null && !n.hasTail() && !n.hasAgent()) {
+            inputs[0] = 1;
+        }
+        else
+            inputs[0] = 0;
+        //Pode ir para ESTE
+        if (e != null && !e.hasTail() && !e.hasAgent()) {
+            inputs[1] = 1;
+        }
+        else
+            inputs[1] = 0;
+
+        //Pode ir para SUL
+        if (s != null && !s.hasTail() && !s.hasAgent()) {
+            inputs[2] = 1;
+        }
+        else
+            inputs[2] = 0;
+
+        //Pode ir para OESTE
+        if (w != null && !w.hasTail() && !w.hasAgent()) {
+            inputs[3] = 1;
+        }
+        else
+            inputs[3] = 0;
+
+        //Posição da comida: acima?
+        if (environment.getFood().getCell().getLine() > getCell().getLine()) {
+            inputs[4] = 1;
+        }
+        else
+            inputs[4] = 0;
+
+        //Posição da comida: à direita?
+        if (environment.getFood().getCell().getColumn() > getCell().getColumn()) {
+            inputs[5] = 1;
+        }
+        else
+            inputs[5] = 0;
+
+        //Posição da comida: abaixo?
+        if (environment.getFood().getCell().getLine() < getCell().getLine()) {
+            inputs[6] = 1;
+        }
+        else
+            inputs[6] = 0;
+
+        //Posição da comida: à esquerda?
+        if (environment.getFood().getCell().getColumn() < getCell().getColumn()) {
+            inputs[7] = 1;
+        }
+        else
+            inputs[7] = 0;
+
+    }
 }
