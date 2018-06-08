@@ -1,0 +1,30 @@
+------------- Experiências -----------
+
+(tentar usar 3 valores para parametros)
+
+-Testes preliminares para os controladores desenvolvidos nas tarefas 3,4,5
+    - parametros que aparentam funcionar melhor
+-Testes torneio -> escolher melhor
+-Testes tamanho população -> escolher melhor
+-Testes recombinação -> escolher melhor
+-Testes mutação -> escolher melhor
+-Testes adhoc e random *
+-apresentação de resultados
+-discussão
+
+---- Relatorio ----
+-Resumo
+-Introdução
+-Descrição da implementação
+    -Tarefa 1 e 2 - adhoc e random
+    -Tarefa 3 -controlador AI
+        -Representacao dos individuos, funcao de avaliacao, ...
+    -Tarefa 4 - controlador Homogéneo
+        ...
+-Apresentação e discussão dos
+    -resumo das experiencias
+    -apresentacao dos resultados
+    -discussao dos resultados
+-Conclusoes
+
+(grafico de barras)

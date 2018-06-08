@@ -30,6 +30,7 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
         movements=0;
         foods=0;
         fitness=0;
+        int penalty = 0;
         for (int i = 0; i < problem.getNumEvironmentSimulations(); i++) {
             //TODO: seed needs initialization ?????
             environment.initialize(i);
@@ -37,10 +38,12 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
             environment.simulate();
             foods += environment.getFoods();
             movements += environment.getMovements();
-
+            if(environment.getTipoProblema() == 5) {
+                 penalty += Math.abs(environment.getFoods1() - environment.getFoods2());
+            }
         }
-        fitness = foods*1000 + movements;
-
+        //penalty
+        fitness = foods * 1000 + movements - (penalty * 1000);
         return fitness;
     }
 

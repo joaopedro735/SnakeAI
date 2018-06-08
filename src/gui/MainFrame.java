@@ -25,7 +25,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class MainFrame extends JFrame implements GAListener {
 
     private static final long serialVersionUID = 1L;
-    private SnakeProblem problem= new SnakeProblem(0);
+    private SnakeProblem problem = new SnakeProblem(0);
     private GeneticAlgorithm<SnakeIndividual, SnakeProblem> ga;
     private SnakeIndividual bestInRun;
     private SnakeExperimentsFactory experimentsFactory;
@@ -42,12 +42,8 @@ public class MainFrame extends JFrame implements GAListener {
     private XYSeries seriesAverage;
     private SwingWorker<Void, Void> worker;
     private int tipoProblema;
+    private int nadalol;
     private PanelSimulation simulationPanel;
-
-    public int getTipoProblema() {
-        return tipoProblema;
-    }
-
 
     public MainFrame() {
         try {
@@ -57,8 +53,13 @@ public class MainFrame extends JFrame implements GAListener {
         }
     }
 
+    public int getTipoProblema() {
+        return tipoProblema;
+    }
+
     public void criarProblema() {
         tipoProblema = panelParameters.comboBoxSnakeAgents.getSelectedIndex();
+        System.out.println(tipoProblema);
         if(tipoProblema <= 1)
             problem = new SnakeProblem(tipoProblema);
     }
@@ -168,7 +169,7 @@ public class MainFrame extends JFrame implements GAListener {
         try {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File dataSet = fc.getSelectedFile();
-                problem = SnakeProblem.buildProblemFromFile(dataSet);
+                problem = SnakeProblem.buildProblemFromFile(dataSet, tipoProblema);
                 problemPanel.textArea.setText(problem.toString());
                 problemPanel.textArea.setCaretPosition(0);
                 buttonRun.setEnabled(true);
@@ -279,7 +280,7 @@ public class MainFrame extends JFrame implements GAListener {
                     while (experimentsFactory.hasMoreExperiments()) {
                         try {
 
-                            Experiment experiment = experimentsFactory.nextExperiment();
+                            Experiment experiment = experimentsFactory.nextExperiment(tipoProblema);
                             experiment.run();
 
                         } catch (IOException e1) {

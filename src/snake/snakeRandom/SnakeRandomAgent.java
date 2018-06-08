@@ -52,7 +52,6 @@ public class SnakeRandomAgent extends SnakeAgent {
         //Random number between 0 and 3 and switch case
         //if chosen direction is impossible, try the next set of rules
         int direction = random.nextInt(Action.values().length);
-        System.out.println("Next int:" + direction);
         switch (direction) {
             case (NORTH):
                 if (n != null && !n.hasTail() && !n.hasAgent()) {

@@ -27,7 +27,7 @@ public class SnakeExperimentsFactory extends ExperimentsFactory {
     }
 
     @Override
-    public Experiment buildExperiment() throws IOException {
+    public Experiment buildExperiment(int tipoProblema) throws IOException {
         numRuns = Integer.parseInt(getParameterValue("Runs"));
         populationSize = Integer.parseInt(getParameterValue("Population size"));
         maxGenerations = Integer.parseInt(getParameterValue("Max generations"));
@@ -53,8 +53,10 @@ public class SnakeExperimentsFactory extends ExperimentsFactory {
                 break;
             case "uniform":
                 recombination = new RecombinationUniform<>(recombinationProbability);
+                break;
             case "four_choices":
                 recombination = new RecombinationUniform<>(recombinationProbability);
+                break;
         }
 
         // TODO YOU MAY ADD NEW PARAMETERS (eg., NEW GENETIC OPERATORS, ...).
@@ -65,11 +67,11 @@ public class SnakeExperimentsFactory extends ExperimentsFactory {
         double mutationProbability = Double.parseDouble(getParameterValue("Mutation probability"));
         if (getParameterValue("Mutation").equals("uniform_distribution")) {
             //TODO OTHER PARAMETERS TO YOUR MUTATION OPERATOR, IF THEY EXIST, ARE FETCHED HERE
-            mutation = new MutationFourChoices<>(mutationProbability /*TODO COMPLETE?*/);
+            mutation = new MutationRandom<>(mutationProbability /*TODO COMPLETE?*/);
         }
 
         //PROBLEM 
-        problem = SnakeProblem.buildProblemFromFile(new File(getParameterValue("Problem file")));
+        problem = SnakeProblem.buildProblemFromFile(new File(getParameterValue("Problem file")), tipoProblema);
 
         String textualRepresentation = buildTextualExperiment();
 
