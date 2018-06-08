@@ -89,6 +89,5 @@ public class SnakeAIAgentTwo extends SnakeAIAgent {
             inputs[9] = 1;
         else
             inputs[9] = 0;
-
     }
 }
