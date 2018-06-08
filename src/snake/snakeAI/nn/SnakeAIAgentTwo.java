@@ -26,34 +26,35 @@ public class SnakeAIAgentTwo extends SnakeAIAgent {
         Cell s = perception.getS();
 
         //Pode ir para NORTE e DEVE
-        if (n != null && !n.hasTail() && !n.hasAgent() /*&& environment.getFood().getCell().getLine() > getCell().getLine()*/) {
+        if (n != null && !n.hasTail() && !n.hasAgent() && !n.hasFood()) {
             inputs[0] = 1;
         }
         else
             inputs[0] = 0;
+
         //Pode ir para ESTE e DEVE
-        if (e != null && !e.hasTail() && !e.hasAgent() /*&& environment.getFood().getCell().getColumn() > getCell().getColumn()*/) {
+        if (e != null && !e.hasTail() && !e.hasAgent() && !e.hasFood()) {
             inputs[1] = 1;
         }
         else
             inputs[1] = 0;
 
         //Pode ir para SUL e DEVE
-        if (s != null && !s.hasTail() && !s.hasAgent() /*&& environment.getFood().getCell().getLine() < getCell().getLine()*/) {
+        if (s != null && !s.hasTail() && !s.hasAgent() && !s.hasFood()) {
             inputs[2] = 1;
         }
         else
             inputs[2] = 0;
 
         //Pode ir para OESTE e DEVE
-        if (w != null && !w.hasTail() && !w.hasAgent() /*&& environment.getFood().getCell().getColumn() < getCell().getColumn()*/) {
+        if (w != null && !w.hasTail() && !w.hasAgent() && !w.hasFood()) {
             inputs[3] = 1;
         }
         else
             inputs[3] = 0;
 
 
-        //Food norte
+       /* //Food norte
         if (n != null && n.hasFood())
             inputs[4] = 1;
         else
@@ -61,31 +62,31 @@ public class SnakeAIAgentTwo extends SnakeAIAgent {
 
         //Food este
         if (e != null && e.hasFood())
-            inputs[5] = 1;
+            inputs[1] = 1;
         else
-            inputs[5] = 0;
+            inputs[1] = 0;
 
         //Food sul
         if (s != null && s.hasFood())
-            inputs[6] = 1;
+            inputs[2] = 1;
         else
-            inputs[6] = 0;
+            inputs[2] = 0;
 
         //Food oeste
         if (w != null && w.hasFood())
-            inputs[7] = 1;
+            inputs[3] = 1;
         else
-            inputs[7] = 0;
-        //TODO
-        /*if ((environment.getFood().getCell().getColumn() == getCell().getColumn()))
+            inputs[3] = 0;
+
+        if (environment.getFood().getCell().getColumn() == getCell().getColumn())
             inputs[8] = 1;
         else
             inputs[8] = 0;
 
-        if ((environment.getFood().getCell().getLine() == getCell().getLine()))
+        if (environment.getFood().getCell().getLine() == getCell().getLine())
             inputs[9] = 1;
         else
-            inputs[9] = 0;*/
-
+            inputs[9] = 0;
+        */
     }
 }

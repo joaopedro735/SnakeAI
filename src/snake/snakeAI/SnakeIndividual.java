@@ -40,11 +40,10 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
             movements += environment.getMovements();
             if(environment.getTipoProblema() == 5) {
                  penalty += Math.abs(environment.getFoods1() - environment.getFoods2());
+            }
         }
-
-            //penalty
-            fitness = foods * 1000 + movements - (penalty * 360);
-        }
+        //penalty
+        fitness = foods * 1000 + movements - (penalty * 1000);
         return fitness;
     }
 

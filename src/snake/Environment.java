@@ -66,10 +66,12 @@ public class Environment {
             int numInputs,
             int numHiddenUnits,
             int numOutputs,
-            int size1) {
+            int size1,
+            int numInputs2) {
 
         this(size,maxIterations,tipoProblema);
         this.numInputs = numInputs;
+        this.numInputs2 = numInputs2;
         this.numHiddenUnits = numHiddenUnits;
         this.numOutputs = numOutputs;
         this.size1 = size1;
@@ -124,7 +126,7 @@ public class Environment {
                 agents.add(new SnakeAIAgentOne(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
                         numInputs, numHiddenUnits, numOutputs, this, Color.blue));
                 agents.add(new SnakeAIAgentTwo(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
-                        numInputs, numHiddenUnits, numOutputs, this, Color.magenta));
+                        numInputs2, numHiddenUnits, numOutputs, this, Color.magenta));
                 break;
         }
     }
@@ -247,8 +249,8 @@ public class Environment {
             //Duas diferentes
             double[] genome1 = new double[numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs];
             System.arraycopy(genome,0,genome1,0,numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs);
-            double[] genome2 = new double[size1-(numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs)];
-            System.arraycopy(genome,0,genome2,0,size1-(numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs));
+            double[] genome2 = new double[numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs];
+            System.arraycopy(genome,0,genome2,0,numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs);
             ((SnakeAIAgent) agents.get(0)).setWeights(genome1);
             ((SnakeAIAgent) agents.get(1)).setWeights(genome2);
         }

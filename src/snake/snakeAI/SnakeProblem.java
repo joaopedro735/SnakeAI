@@ -13,7 +13,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
     private static final int NUM_NN_INPUTS = 9; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
     private static final int NUM_NN_OUTPUTS = 4; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
     //segunda cobra
-    private static final int NUM_NN_INPUTS2 = 9; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
+    private static final int NUM_NN_INPUTS2 = 5; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
     private  int GENOME_SIZE; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
 
     final private int environmentSize;
@@ -42,7 +42,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
         this.numOutputs = NUM_NN_OUTPUTS;
         this.numEnvironmentRuns = numEnvironmentRuns;
         this.tipoProblema = tipoProblema;
-        this.numInputs2 = NUM_NN_INPUTS2;
+
         if(tipoProblema == 2 || tipoProblema == 4){
             numInputs = NUM_NN_INPUTS;
             GENOME_SIZE=numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
@@ -53,12 +53,11 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
                     numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
         }else if(tipoProblema == 3){
             //tipoProblema = 3
-            numInputs = NUM_NN_INPUTS2;
+            numInputs2 = NUM_NN_INPUTS2;
             GENOME_SIZE=numInputs2*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
         }
-
         environment = new Environment(environmentSize,
-                maxIterations,tipoProblema,numInputs,numHiddenUnits,numOutputs,GENOME_SIZE);
+                maxIterations,tipoProblema,numInputs,numHiddenUnits,numOutputs,GENOME_SIZE,numInputs2);
     }
 
     /*//segunda cobra
@@ -162,6 +161,9 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
         sb.append("\n");
         sb.append("Number of inputs: ");
         sb.append(numInputs);
+        sb.append("\n");
+        sb.append("Number of inputs of second snake: ");
+        sb.append(numInputs2);
         sb.append("\n");
         sb.append("Number of hidden units: ");
         sb.append(numHiddenUnits);
