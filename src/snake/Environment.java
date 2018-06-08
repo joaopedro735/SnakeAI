@@ -114,7 +114,7 @@ public class Environment {
                 break;
             case 3:
                 agents.add(new SnakeAIAgentTwo(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],
-                        numInputs, numHiddenUnits, numOutputs, this, Color.blue));
+                        numInputs2, numHiddenUnits, numOutputs, this, Color.blue));
                 break;
             case 4:
                 agents.add(new SnakeAIAgentOne(grid[random.nextInt(grid.length)][random.nextInt(grid.length)],

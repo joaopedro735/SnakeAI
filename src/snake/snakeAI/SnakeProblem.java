@@ -13,7 +13,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
     private static final int NUM_NN_INPUTS = 9; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
     private static final int NUM_NN_OUTPUTS = 4; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
     //segunda cobra
-    private static final int NUM_NN_INPUTS2 = 5; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
+    private static final int NUM_NN_INPUTS2 = 11; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
     private  int GENOME_SIZE; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
 
     final private int environmentSize;

@@ -25,58 +25,60 @@ public class SnakeAIAgentTwo extends SnakeAIAgent {
         Cell e = perception.getE();
         Cell s = perception.getS();
 
-        //Pode ir para NORTE e DEVE
-        if (n != null && !n.hasTail() && !n.hasAgent() && !n.hasFood()) {
+        //Pode ir para NORTE
+        if (n != null && !n.hasTail() && !n.hasAgent()) {
             inputs[0] = 1;
         }
         else
             inputs[0] = 0;
-
-        //Pode ir para ESTE e DEVE
-        if (e != null && !e.hasTail() && !e.hasAgent() && !e.hasFood()) {
+        //Pode ir para ESTE
+        if (e != null && !e.hasTail() && !e.hasAgent()) {
             inputs[1] = 1;
         }
         else
             inputs[1] = 0;
 
-        //Pode ir para SUL e DEVE
-        if (s != null && !s.hasTail() && !s.hasAgent() && !s.hasFood()) {
+        //Pode ir para SUL
+        if (s != null && !s.hasTail() && !s.hasAgent()) {
             inputs[2] = 1;
         }
         else
             inputs[2] = 0;
 
-        //Pode ir para OESTE e DEVE
-        if (w != null && !w.hasTail() && !w.hasAgent() && !w.hasFood()) {
+        //Pode ir para OESTE
+        if (w != null && !w.hasTail() && !w.hasAgent()) {
             inputs[3] = 1;
         }
         else
             inputs[3] = 0;
 
-
-       /* //Food norte
-        if (n != null && n.hasFood())
+        //Posição da comida: acima?
+        if (environment.getFood().getCell().getLine() > getCell().getLine()) {
             inputs[4] = 1;
+        }
         else
             inputs[4] = 0;
 
-        //Food este
-        if (e != null && e.hasFood())
-            inputs[1] = 1;
+        //Posição da comida: à direita?
+        if (environment.getFood().getCell().getColumn() > getCell().getColumn()) {
+            inputs[5] = 1;
+        }
         else
-            inputs[1] = 0;
+            inputs[5] = 0;
 
-        //Food sul
-        if (s != null && s.hasFood())
-            inputs[2] = 1;
+        //Posição da comida: abaixo?
+        if (environment.getFood().getCell().getLine() < getCell().getLine()) {
+            inputs[6] = 1;
+        }
         else
-            inputs[2] = 0;
+            inputs[6] = 0;
 
-        //Food oeste
-        if (w != null && w.hasFood())
-            inputs[3] = 1;
+        //Posição da comida: à esquerda?
+        if (environment.getFood().getCell().getColumn() < getCell().getColumn()) {
+            inputs[7] = 1;
+        }
         else
-            inputs[3] = 0;
+            inputs[7] = 0;
 
         if (environment.getFood().getCell().getColumn() == getCell().getColumn())
             inputs[8] = 1;
@@ -87,6 +89,5 @@ public class SnakeAIAgentTwo extends SnakeAIAgent {
             inputs[9] = 1;
         else
             inputs[9] = 0;
-        */
     }
 }
