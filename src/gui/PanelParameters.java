@@ -39,6 +39,8 @@ public class PanelParameters extends PanelAtributesValue {
     //TODO - MORE PARAMETERS?
     String[] snakeAgents = {"Ad-Hoc Snake", "Random Snake", "AI Snake", "AI Snake 2", "AI Snake Homogeneous", "AI Snake Heterogeneous"};
     JComboBox comboBoxSnakeAgents = new JComboBox(snakeAgents);
+    String[] mutationMethods = {"Random", "Scramble", "Scramble Contiguous"};
+    JComboBox comboBoxMutationMethods = new JComboBox(mutationMethods);
 
     private MainFrame mainFrame;
     public PanelParameters(MainFrame mainFrame) {
@@ -78,6 +80,9 @@ public class PanelParameters extends PanelAtributesValue {
         labels.add(new JLabel("Type of agent: "));
         valueComponents.add(comboBoxSnakeAgents);
         comboBoxSnakeAgents.addActionListener(new JComboBoxSnakeMethods_ActionAdapter(this));
+
+        labels.add(new JLabel("Type of mutation: "));
+        valueComponents.add(comboBoxMutationMethods);
 
         configure();
     }
@@ -122,8 +127,15 @@ public class PanelParameters extends PanelAtributesValue {
 
     public Mutation<SnakeIndividual> getMutationMethod() {
         double mutationProbability = Double.parseDouble(textFieldProbMutation.getText());
-        //TODO
-        return new MutationScramble<>(mutationProbability/*TODO?*/);
+        switch (comboBoxMutationMethods.getSelectedIndex()) {
+            case 0:
+                return new MutationRandom<>(mutationProbability);
+            case 1:
+                return new MutationScramble<>(mutationProbability/*TODO?*/);
+            case 2:
+                return new MutationScrambleContiguous<>(mutationProbability);
+        }
+        return null;
     }
 }
 
