@@ -14,6 +14,11 @@ public class MutationScrambleContiguous<I extends RealVectorIndividual> extends 
     }
 
     @Override
+    public String toString() {
+        return "Scramble contiguous mutation (" + probability + ")";
+    }
+
+    @Override
     public void run(I ind) {
         /*
         *   Escolhe duas posições e entre as mesmas(contiguous) mistura os genes.

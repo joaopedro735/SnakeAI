@@ -24,6 +24,6 @@ public class MutationRandom<I extends RealVectorIndividual> extends Mutation<I> 
     
     @Override
     public String toString(){
-        return "Uniform distribution mutation (" + probability /* + TODO?*/ + ")";
+        return "Random mutation (" + probability /* + TODO?*/ + ")";
     }
 }

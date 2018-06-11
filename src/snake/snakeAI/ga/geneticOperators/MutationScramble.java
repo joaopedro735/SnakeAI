@@ -22,5 +22,8 @@ public class MutationScramble<I extends RealVectorIndividual> extends Mutation<I
 
     }
 
-
+    @Override
+    public String toString() {
+        return "Scramble mutation (" + probability + ")";
+    }
 }
